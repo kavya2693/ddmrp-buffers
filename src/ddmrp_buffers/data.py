@@ -219,7 +219,9 @@ def load(data_dir: Path) -> Dataset:
         }
     )
     initial = skus.pop("initial_on_hand").to_numpy(dtype=float)
-    return Dataset(skus=skus, dates=dates, demand=wide.to_numpy(dtype=float), bulk=bulk, initial_on_hand=initial)
+    return Dataset(
+        skus=skus, dates=dates, demand=wide.to_numpy(dtype=float), bulk=bulk, initial_on_hand=initial
+    )
 
 
 def summary(ds: Dataset) -> dict[str, float]:
@@ -234,4 +236,3 @@ def summary(ds: Dataset) -> dict[str, float]:
         "bulk_orders": float(len(ds.bulk)),
         "zero_demand_day_share": float((sim == 0).mean()),
     }
-
