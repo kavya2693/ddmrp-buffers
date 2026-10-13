@@ -17,7 +17,6 @@ ddmrp-buffers = "ddmrp_buffers.cli:main"
 [dependency-groups]
 dev = [
     "mypy>=1.15",
-    "pandas-stubs>=2.2",
     "pytest>=8.3",
     "ruff>=0.11",
 ]
