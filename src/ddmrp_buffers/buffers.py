@@ -87,7 +87,7 @@ def zones(
     red_base = adu * dlt * ltf
     red = red_base * (1.0 + vf)
     yellow = adu * dlt
-    green = np.maximum.reduce([red_base, np.asarray(moq, dtype=float), adu * order_cycle_days])
+    green = np.maximum(np.maximum(red_base, np.asarray(moq, dtype=float)), adu * order_cycle_days)
     active = adu > 0
     return Zones(
         red=np.where(active, red, 0.0),
