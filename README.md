@@ -68,12 +68,12 @@ own 98.46% fill rate:
 | Policy | DIO at 98.46% fill | Change vs legacy |
 |---|---:|---:|
 | Min-max (legacy) | 97.6 | |
-| Reorder point (tuned) | 65.9 | −32% |
+| Reorder point (tuned) | 65.9 | −33% |
 | DDMRP | 52.1 | −47% |
 
 ![Stock held for a given service level](outputs/frontier.png)
 
-Repeated on three freshly generated ranges with fresh lead-time draws, DDMRP holds
+Across this range and three freshly generated ones with fresh lead-time draws, DDMRP holds
 51.7 to 59.6 days at the legacy fill rate against 97.6 to 108.2 days for legacy min-max.
 The tuned reorder point needs 65.9 to 74.1 days, and on one seed never reaches the legacy
 fill rate within the sweep (z up to 5.5).
