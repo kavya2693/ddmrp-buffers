@@ -12,7 +12,7 @@
 [ ] Gate 2 closed (results not yet reviewed by Kavyasri)
 [ ] Dockerfile builds and runs (local Docker daemon failed with an I/O error; image is built and run in CI instead)
 [ ] CI workflow green on GitHub
-[x] .env.example present, no real values (not needed: no keys, no services)
+[-] .env.example not needed: no keys, no services
 [ ] prepush-scan.sh passes
 [x] 10+ incremental commits
 [ ] Public repo created, pushed, remote HEAD == local HEAD
