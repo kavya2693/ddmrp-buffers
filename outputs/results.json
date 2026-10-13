@@ -1,0 +1,220 @@
+{
+  "dataset": {
+    "skus": 800.0,
+    "days_total": 1096.0,
+    "days_simulated": 731.0,
+    "import_share": 0.26375,
+    "history_missing_share": 0.046972602739726026,
+    "bulk_orders": 4702.0,
+    "zero_demand_day_share": 0.5967835157318742,
+    "bulk_share_of_simulated_demand_value": 0.13555893039692618
+  },
+  "opening_dio_days": 172.02692982488625,
+  "opening_stock_value": 21516738.380000003,
+  "classes_at_start": {
+    "runner": 303,
+    "repeater": 275,
+    "stranger": 194,
+    "dormant": 28
+  },
+  "policies": {
+    "min-max (legacy)": {
+      "year_1": {
+        "avg_inventory_value": 14031084.751830598,
+        "dio_days": 117.73990651036331,
+        "value_fill_rate": 0.9598564452609827,
+        "lost_sales_value": 1824140.0899999999,
+        "stockout_sku_day_share": 0.009757513661202186,
+        "skus_with_stockout_share": 0.185,
+        "purchase_orders_per_month": 177.41639344262296
+      },
+      "year_2": {
+        "avg_inventory_value": 11955972.556191782,
+        "dio_days": 97.63507755936524,
+        "value_fill_rate": 0.9845768100896859,
+        "lost_sales_value": 700158.72,
+        "stockout_sku_day_share": 0.0032773972602739725,
+        "skus_with_stockout_share": 0.16,
+        "purchase_orders_per_month": 195.05972602739726
+      },
+      "both_years": {
+        "avg_inventory_value": 12994948.019398086,
+        "dio_days": 107.5645524062022,
+        "value_fill_rate": 0.9722106500668696,
+        "lost_sales_value": 2524298.81,
+        "stockout_sku_day_share": 0.006521887824897401,
+        "skus_with_stockout_share": 0.27625,
+        "purchase_orders_per_month": 186.22599179206566
+      }
+    },
+    "reorder point (tuned)": {
+      "year_1": {
+        "avg_inventory_value": 9774668.864836065,
+        "dio_days": 81.90596354050605,
+        "value_fill_rate": 0.9612254351714872,
+        "lost_sales_value": 1761932.6099999999,
+        "stockout_sku_day_share": 0.009549180327868853,
+        "skus_with_stockout_share": 0.5775,
+        "purchase_orders_per_month": 749.6174863387978
+      },
+      "year_2": {
+        "avg_inventory_value": 4717158.293589041,
+        "dio_days": 40.1288493274601,
+        "value_fill_rate": 0.9451360137987507,
+        "lost_sales_value": 2490632.52,
+        "stockout_sku_day_share": 0.012602739726027398,
+        "skus_with_stockout_share": 0.6375,
+        "purchase_orders_per_month": 1039.1802739726027
+      },
+      "both_years": {
+        "avg_inventory_value": 7249372.888768811,
+        "dio_days": 61.203804230020324,
+        "value_fill_rate": 0.9531846150531609,
+        "lost_sales_value": 4252565.130000001,
+        "stockout_sku_day_share": 0.011073871409028728,
+        "skus_with_stockout_share": 0.76875,
+        "purchase_orders_per_month": 894.2008207934336
+      }
+    },
+    "DDMRP": {
+      "year_1": {
+        "avg_inventory_value": 9790307.305191256,
+        "dio_days": 81.08387482674213,
+        "value_fill_rate": 0.9725245059368401,
+        "lost_sales_value": 1248498.06,
+        "stockout_sku_day_share": 0.005867486338797814,
+        "skus_with_stockout_share": 0.4675,
+        "purchase_orders_per_month": 726.9420765027322
+      },
+      "year_2": {
+        "avg_inventory_value": 4791601.163534246,
+        "dio_days": 39.879027182354314,
+        "value_fill_rate": 0.9660657267475388,
+        "lost_sales_value": 1540496.97,
+        "stockout_sku_day_share": 0.006157534246575343,
+        "skus_with_stockout_share": 0.56625,
+        "purchase_orders_per_month": 1004.1161643835617
+      },
+      "both_years": {
+        "avg_inventory_value": 7294373.322010945,
+        "dio_days": 60.56005544666606,
+        "value_fill_rate": 0.9692966781335878,
+        "lost_sales_value": 2788995.0300000003,
+        "stockout_sku_day_share": 0.006012311901504788,
+        "skus_with_stockout_share": 0.7275,
+        "purchase_orders_per_month": 865.339534883721
+      }
+    },
+    "DDMRP, no order-spike visibility": {
+      "year_1": {
+        "avg_inventory_value": 9722553.210792352,
+        "dio_days": 81.59505891436854,
+        "value_fill_rate": 0.9597435288374097,
+        "lost_sales_value": 1829271.06,
+        "stockout_sku_day_share": 0.008408469945355192,
+        "skus_with_stockout_share": 0.52875,
+        "purchase_orders_per_month": 722.2907103825137
+      },
+      "year_2": {
+        "avg_inventory_value": 4679205.072191782,
+        "dio_days": 39.81709370947702,
+        "value_fill_rate": 0.9448722416562874,
+        "lost_sales_value": 2502606.8499999996,
+        "stockout_sku_day_share": 0.009482876712328767,
+        "skus_with_stockout_share": 0.6075,
+        "purchase_orders_per_month": 1002.0339726027396
+      },
+      "both_years": {
+        "avg_inventory_value": 7204328.764021887,
+        "dio_days": 60.87927964318497,
+        "value_fill_rate": 0.9523114812589928,
+        "lost_sales_value": 4331877.91,
+        "stockout_sku_day_share": 0.008944938440492475,
+        "skus_with_stockout_share": 0.7575,
+        "purchase_orders_per_month": 861.970998632011
+      }
+    },
+    "DDMRP + slow-mover rule": {
+      "year_1": {
+        "avg_inventory_value": 9540029.390300546,
+        "dio_days": 79.80192665457328,
+        "value_fill_rate": 0.9628864166449087,
+        "lost_sales_value": 1686456.9100000001,
+        "stockout_sku_day_share": 0.007616120218579235,
+        "skus_with_stockout_share": 0.53625,
+        "purchase_orders_per_month": 775.7814207650273
+      },
+      "year_2": {
+        "avg_inventory_value": 4394015.784301371,
+        "dio_days": 37.107037892937456,
+        "value_fill_rate": 0.952085374088938,
+        "lost_sales_value": 2175155.94,
+        "stockout_sku_day_share": 0.00852054794520548,
+        "skus_with_stockout_share": 0.65375,
+        "purchase_orders_per_month": 1083.9057534246574
+      },
+      "both_years": {
+        "avg_inventory_value": 6970542.4324487,
+        "dio_days": 58.58521222192568,
+        "value_fill_rate": 0.9574885071569944,
+        "lost_sales_value": 3861612.8500000006,
+        "stockout_sku_day_share": 0.008067715458276333,
+        "skus_with_stockout_share": 0.78125,
+        "purchase_orders_per_month": 929.6328317373461
+      }
+    }
+  },
+  "matched_service": {
+    "target_value_fill_rate_year_2": 0.9845768100896859,
+    "dio_at_target": {
+      "reorder point (tuned)": 65.88761389729962,
+      "DDMRP": 52.14027063942645
+    }
+  },
+  "robustness": [
+    {
+      "seed": 20240101,
+      "legacy_dio": 97.63507755936524,
+      "legacy_fill": 0.9845768100896859,
+      "rop_dio": 40.1288493274601,
+      "rop_fill": 0.9451360137987507,
+      "ddmrp_dio": 39.879027182354314,
+      "ddmrp_fill": 0.9660657267475388,
+      "rop_dio_at_legacy_fill": 65.88761389729962,
+      "ddmrp_dio_at_legacy_fill": 52.14027063942645
+    },
+    {
+      "seed": 20240102,
+      "legacy_dio": 108.21274471555238,
+      "legacy_fill": 0.979915941786423,
+      "rop_dio": 46.86791259857535,
+      "rop_fill": 0.9404351882386188,
+      "ddmrp_dio": 44.62872182092549,
+      "ddmrp_fill": 0.9651668517012156,
+      "rop_dio_at_legacy_fill": 67.61322193316363,
+      "ddmrp_dio_at_legacy_fill": 51.68605828595705
+    },
+    {
+      "seed": 20240103,
+      "legacy_dio": 103.59283833245262,
+      "legacy_fill": 0.9869748885586715,
+      "rop_dio": 47.343545409141264,
+      "rop_fill": 0.9377060247847878,
+      "ddmrp_dio": 45.23294123830574,
+      "ddmrp_fill": 0.9649977795017036,
+      "rop_dio_at_legacy_fill": null,
+      "ddmrp_dio_at_legacy_fill": 59.64968419245725
+    },
+    {
+      "seed": 20240104,
+      "legacy_dio": 101.52931597889601,
+      "legacy_fill": 0.9861535175633657,
+      "rop_dio": 41.61689755161871,
+      "rop_fill": 0.9431897537667557,
+      "ddmrp_dio": 40.20938266607249,
+      "ddmrp_fill": 0.9686006242900684,
+      "rop_dio_at_legacy_fill": 74.09908914618744,
+      "ddmrp_dio_at_legacy_fill": 52.52189619803245
+    }
+  ]
+}

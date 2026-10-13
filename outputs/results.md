@@ -1,0 +1,107 @@
+# Results
+
+Opening stock 21,516,738 at cost, 172.0 days of trailing usage. SKUs at start: {'runner': 303, 'repeater': 275, 'stranger': 194, 'dormant': 28}.
+
+## year 2
+
+| Policy | Avg stock at cost | DIO (days) | Value fill rate | Stockout SKU-days | Lost sales at cost | POs per month |
+|---|---:|---:|---:|---:|---:|---:|
+| min-max (legacy) | 11,955,973 | 97.6 | 98.46% | 0.33% | 700,159 | 195 |
+| reorder point (tuned) | 4,717,158 | 40.1 | 94.51% | 1.26% | 2,490,633 | 1,039 |
+| DDMRP | 4,791,601 | 39.9 | 96.61% | 0.62% | 1,540,497 | 1,004 |
+| DDMRP, no order-spike visibility | 4,679,205 | 39.8 | 94.49% | 0.95% | 2,502,607 | 1,002 |
+| DDMRP + slow-mover rule | 4,394,016 | 37.1 | 95.21% | 0.85% | 2,175,156 | 1,084 |
+
+## year 1
+
+| Policy | Avg stock at cost | DIO (days) | Value fill rate | Stockout SKU-days | Lost sales at cost | POs per month |
+|---|---:|---:|---:|---:|---:|---:|
+| min-max (legacy) | 14,031,085 | 117.7 | 95.99% | 0.98% | 1,824,140 | 177 |
+| reorder point (tuned) | 9,774,669 | 81.9 | 96.12% | 0.95% | 1,761,933 | 750 |
+| DDMRP | 9,790,307 | 81.1 | 97.25% | 0.59% | 1,248,498 | 727 |
+| DDMRP, no order-spike visibility | 9,722,553 | 81.6 | 95.97% | 0.84% | 1,829,271 | 722 |
+| DDMRP + slow-mover rule | 9,540,029 | 79.8 | 96.29% | 0.76% | 1,686,457 | 776 |
+
+## both years
+
+| Policy | Avg stock at cost | DIO (days) | Value fill rate | Stockout SKU-days | Lost sales at cost | POs per month |
+|---|---:|---:|---:|---:|---:|---:|
+| min-max (legacy) | 12,994,948 | 107.6 | 97.22% | 0.65% | 2,524,299 | 186 |
+| reorder point (tuned) | 7,249,373 | 61.2 | 95.32% | 1.11% | 4,252,565 | 894 |
+| DDMRP | 7,294,373 | 60.6 | 96.93% | 0.60% | 2,788,995 | 865 |
+| DDMRP, no order-spike visibility | 7,204,329 | 60.9 | 95.23% | 0.89% | 4,331,878 | 862 |
+| DDMRP + slow-mover rule | 6,970,542 | 58.6 | 95.75% | 0.81% | 3,861,613 | 930 |
+
+## Year 2 by segment
+
+| Segment | Policy | Avg stock at cost | DIO (days) | Value fill rate | Stockout SKU-days | Lost sales at cost | POs per month |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| local blend | min-max (legacy) | 7,136,989 | 81.2 | 99.47% | 0.08% | 169,593 | 166 |
+| import | min-max (legacy) | 4,818,984 | 139.4 | 95.97% | 1.02% | 530,566 | 29 |
+| runner at start | min-max (legacy) | 8,034,437 | 95.9 | 99.61% | 0.24% | 119,200 | 79 |
+| repeater at start | min-max (legacy) | 2,367,718 | 98.5 | 98.76% | 0.17% | 110,528 | 68 |
+| stranger at start | min-max (legacy) | 1,263,278 | 120.4 | 94.39% | 0.22% | 227,594 | 40 |
+| dormant at start | min-max (legacy) | 290,539 | 70.0 | 86.19% | 3.52% | 242,836 | 7 |
+| local blend | reorder point (tuned) | 1,847,918 | 22.2 | 94.34% | 1.05% | 1,825,169 | 947 |
+| import | reorder point (tuned) | 2,869,240 | 83.9 | 94.94% | 1.84% | 665,464 | 93 |
+| runner at start | reorder point (tuned) | 2,349,786 | 29.3 | 95.29% | 2.32% | 1,446,302 | 643 |
+| repeater at start | reorder point (tuned) | 1,150,134 | 50.9 | 92.74% | 0.80% | 644,998 | 265 |
+| stranger at start | reorder point (tuned) | 991,762 | 94.6 | 94.29% | 0.29% | 231,661 | 107 |
+| dormant at start | reorder point (tuned) | 225,475 | 51.7 | 90.47% | 1.04% | 167,671 | 24 |
+| local blend | DDMRP | 1,904,317 | 22.3 | 96.80% | 0.47% | 1,031,877 | 909 |
+| import | DDMRP | 2,887,284 | 83.4 | 96.13% | 1.02% | 508,620 | 95 |
+| runner at start | DDMRP | 2,694,223 | 32.7 | 98.01% | 0.76% | 610,811 | 617 |
+| repeater at start | DDMRP | 1,083,092 | 46.9 | 94.80% | 0.61% | 462,088 | 260 |
+| stranger at start | DDMRP | 801,662 | 78.3 | 92.05% | 0.38% | 322,743 | 105 |
+| dormant at start | DDMRP | 212,625 | 48.1 | 91.76% | 0.77% | 144,855 | 22 |
+| local blend | DDMRP, no order-spike visibility | 1,830,904 | 22.1 | 93.90% | 0.91% | 1,966,156 | 909 |
+| import | DDMRP, no order-spike visibility | 2,848,301 | 82.4 | 95.92% | 1.05% | 536,451 | 93 |
+| runner at start | DDMRP, no order-spike visibility | 2,641,314 | 32.5 | 96.65% | 1.20% | 1,029,238 | 620 |
+| repeater at start | DDMRP, no order-spike visibility | 1,045,468 | 47.4 | 90.69% | 1.00% | 827,615 | 258 |
+| stranger at start | DDMRP, no order-spike visibility | 784,477 | 79.9 | 88.26% | 0.50% | 476,439 | 102 |
+| dormant at start | DDMRP, no order-spike visibility | 207,946 | 47.8 | 90.37% | 0.86% | 169,315 | 22 |
+| local blend | DDMRP + slow-mover rule | 1,760,861 | 20.8 | 95.76% | 0.66% | 1,367,235 | 970 |
+| import | DDMRP + slow-mover rule | 2,633,155 | 77.9 | 93.86% | 1.38% | 807,921 | 114 |
+| runner at start | DDMRP + slow-mover rule | 2,694,223 | 32.7 | 98.01% | 0.76% | 610,811 | 617 |
+| repeater at start | DDMRP + slow-mover rule | 1,056,403 | 46.2 | 93.95% | 0.73% | 537,817 | 275 |
+| stranger at start | DDMRP + slow-mover rule | 449,057 | 51.3 | 78.72% | 1.13% | 863,654 | 168 |
+| dormant at start | DDMRP + slow-mover rule | 194,333 | 44.4 | 90.74% | 1.06% | 162,874 | 24 |
+
+## Matched service
+
+Target: legacy year-2 value fill rate 98.46%.
+- reorder point (tuned): DIO 65.9 days
+- DDMRP: DIO 52.1 days
+
+## Sweep
+
+| Knob | Value | Policy | Avg stock at cost | DIO (days) | Value fill rate | Stockout SKU-days | Lost sales at cost | POs per month |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| z | 0.84 | reorder point (tuned) | 3,659,934 | 32.9 | 89.44% | 2.60% | 4,794,780 | 1,011 |
+| z | 1.28 | reorder point (tuned) | 4,041,364 | 35.4 | 91.79% | 1.83% | 3,729,055 | 1,031 |
+| z | 1.65 | reorder point (tuned) | 4,464,497 | 38.4 | 93.40% | 1.44% | 2,994,848 | 1,037 |
+| z | 1.88 | reorder point (tuned) | 4,717,158 | 40.1 | 94.51% | 1.26% | 2,490,633 | 1,039 |
+| z | 2.33 | reorder point (tuned) | 5,258,410 | 44.2 | 95.64% | 0.91% | 1,978,923 | 1,042 |
+| z | 2.75 | reorder point (tuned) | 5,781,534 | 48.2 | 96.49% | 0.71% | 1,594,298 | 1,041 |
+| z | 3.25 | reorder point (tuned) | 6,431,720 | 53.1 | 97.37% | 0.53% | 1,195,667 | 1,038 |
+| z | 3.75 | reorder point (tuned) | 7,067,176 | 58.0 | 97.97% | 0.38% | 920,763 | 1,031 |
+| z | 4.25 | reorder point (tuned) | 7,727,039 | 63.2 | 98.29% | 0.31% | 775,323 | 1,023 |
+| z | 4.75 | reorder point (tuned) | 8,385,051 | 68.4 | 98.61% | 0.25% | 630,615 | 1,020 |
+| z | 5.5 | reorder point (tuned) | 9,380,358 | 76.3 | 98.90% | 0.15% | 497,351 | 1,009 |
+| red multiplier | 0.5 | DDMRP | 3,837,002 | 32.9 | 93.67% | 1.48% | 2,873,886 | 982 |
+| red multiplier | 0.75 | DDMRP | 4,261,753 | 36.0 | 95.26% | 0.93% | 2,150,601 | 996 |
+| red multiplier | 1 | DDMRP | 4,791,601 | 39.9 | 96.61% | 0.62% | 1,540,497 | 1,004 |
+| red multiplier | 1.5 | DDMRP | 5,774,149 | 47.4 | 98.05% | 0.32% | 886,314 | 1,009 |
+| red multiplier | 2 | DDMRP | 6,918,931 | 56.3 | 98.81% | 0.20% | 538,580 | 1,006 |
+| red multiplier | 2.5 | DDMRP | 8,065,720 | 65.4 | 99.19% | 0.13% | 367,329 | 1,000 |
+| red multiplier | 3 | DDMRP | 9,225,535 | 74.5 | 99.55% | 0.07% | 206,472 | 995 |
+| red multiplier | 4 | DDMRP | 11,681,442 | 94.2 | 99.75% | 0.03% | 114,193 | 975 |
+
+## Other seeds (year 2)
+
+| Seed | Legacy DIO | Legacy fill | ROP DIO | ROP fill | DDMRP DIO | DDMRP fill | ROP DIO at legacy fill | DDMRP DIO at legacy fill |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 20240101 | 97.6 | 98.46% | 40.1 | 94.51% | 39.9 | 96.61% | 65.9 | 52.1 |
+| 20240102 | 108.2 | 97.99% | 46.9 | 94.04% | 44.6 | 96.52% | 67.6 | 51.7 |
+| 20240103 | 103.6 | 98.70% | 47.3 | 93.77% | 45.2 | 96.50% | not reached | 59.6 |
+| 20240104 | 101.5 | 98.62% | 41.6 | 94.32% | 40.2 | 96.86% | 74.1 | 52.5 |
