@@ -18,6 +18,7 @@ class SimResult:
     demand: np.ndarray
     filled: np.ndarray
     ordered: np.ndarray
+    received: np.ndarray | None = None
     trace: dict[int, dict[str, np.ndarray]] = field(default_factory=dict)
 
 
@@ -68,12 +69,14 @@ def simulate(
     rec_oh = np.zeros((n_days, n))
     rec_fill = np.zeros((n_days, n))
     rec_ord = np.zeros((n_days, n))
+    rec_recv = np.zeros((n_days, n))
     trace: dict[int, dict[str, np.ndarray]] = {
         j: {k: np.zeros(n_days) for k in ("on_hand", "nfp", "tor", "toy", "tog")} for j in trace_skus
     }
 
     for t in range(n_days):
         on_hand += arrivals[t]
+        rec_recv[t] = arrivals[t]
         on_order -= arrivals[t]
         d = true_demand[t]
         filled = np.minimum(on_hand, d)
@@ -92,4 +95,4 @@ def simulate(
                 tr["on_hand"][t], tr["nfp"][t] = on_hand[j], policy.last_nfp[j]
                 tr["tor"][t], tr["toy"][t], tr["tog"][t] = z.tor[j], z.toy[j], z.tog[j]
 
-    return SimResult(policy.name, rec_oh, true_demand, rec_fill, rec_ord, trace)
+    return SimResult(policy.name, rec_oh, true_demand, rec_fill, rec_ord, rec_recv, trace)
