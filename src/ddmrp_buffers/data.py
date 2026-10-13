@@ -227,6 +227,9 @@ def load(data_dir: Path) -> Dataset:
 def summary(ds: Dataset) -> dict[str, float]:
     s = ds.sim_start_idx
     sim = ds.demand[s:]
+    cost = ds.skus["unit_cost"].to_numpy()
+    b = ds.bulk[ds.bulk["due_day"] >= s]
+    bulk_value = (b["qty"].to_numpy() * cost[b["sku_idx"].to_numpy()]).sum()
     return {
         "skus": float(len(ds.skus)),
         "days_total": float(len(ds.dates)),
@@ -235,4 +238,5 @@ def summary(ds: Dataset) -> dict[str, float]:
         "history_missing_share": float(np.isnan(ds.demand[:s]).mean()),
         "bulk_orders": float(len(ds.bulk)),
         "zero_demand_day_share": float((sim == 0).mean()),
+        "bulk_share_of_simulated_demand_value": float(bulk_value / (sim * cost).sum()),
     }
