@@ -19,7 +19,7 @@ replenishment buffers, measured at the same service level its customers get toda
 |---|---|
 | **Problem** | An 800-SKU lubricants distributor buys on min-max levels reset once a year, with months of extra cover. It opens with 21.5 M of stock at cost (172 days of usage) and still stocks out when a fleet customer orders forty drums at once. |
 | **Approach** | Five replenishment policies run day by day for two years against identical demand, opening stock and supplier delays: legacy min-max, a tuned weekly reorder point, full DDMRP, and two DDMRP ablations. Each safety knob is swept, and stock is read off at the fill rate the legacy policy already delivers. |
-| **Result** | At the legacy policy's own **98.46%** value fill rate, DDMRP holds **52.1 days** of inventory against **97.6** for legacy min-max (**−47%**) and 65.9 for the tuned reorder point (−33%). Across three more freshly generated ranges: 51.7 to 59.6 days against 97.6 to 108.2. |
+| **Result** | At the legacy policy's own **98.46%** value fill rate, DDMRP holds **52.1 days** of inventory against **97.6** for legacy min-max (**−47%**) and 65.9 for the tuned reorder point (−33%). Across this range and three freshly generated ones: 51.7 to 59.6 days against 97.6 to 108.2. |
 | **What didn't win** | About 70% of the stock cut comes from recalculating weekly, not from DDMRP. Without open-order visibility DDMRP lands on the reorder point's numbers (39.8 days, 94.49% fill). The slow-mover rule frees 0.4 M but drops stranger fill rate from 92.05% to 78.72%. Purchase orders rise from about 195 to about 1,000 a month. |
 
 ## Architecture
