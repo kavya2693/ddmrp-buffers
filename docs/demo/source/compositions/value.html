@@ -8,7 +8,7 @@
            of the planner using them (right). Data is inlined by tools/inject_sheet.py between the SHEET markers. */
         #value-root {
           position: absolute; inset: 0;
-          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #6b7280; --w-line: #d1d5db; --w-faint: #f3f4f6;
+          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #4b5563; --w-line: #d1d5db; --w-faint: #f3f4f6;
           --w-data: #d97706; --w-model: #6d3cf0; --w-tools: #1f8fa8; --w-risk: #dc2b4a; --w-opt: #0f9f6e;
           color: var(--w-ink); font-family: Inter, "Helvetica Neue", sans-serif;
         }
@@ -27,7 +27,7 @@
 
         /* sheet */
         #value-root .sheet {
-          position: absolute; left: 120px; top: 270px; width: 1070px; height: 650px; border: 3px solid var(--w-line);
+          position: absolute; left: 120px; top: 300px; width: 1070px; height: 620px; border: 3px solid var(--w-line);
           border-radius: 24px; background: #fff; box-shadow: 0 18px 40px rgba(17, 24, 39, 0.08); overflow: hidden;
         }
         #value-root .sheet-head {
@@ -36,26 +36,26 @@
         }
         #value-root .sheet-head span:last-child { color: #c4b5fd; }
         #value-root .row {
-          position: relative; display: flex; align-items: center; height: 66px; padding: 0 22px;
-          font-family: "JetBrains Mono", monospace; font-size: 21px; color: var(--w-ink); border-bottom: 2px solid var(--w-faint);
+          position: relative; display: flex; align-items: center; height: 62px; padding: 0 16px;
+          font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--w-ink); border-bottom: 2px solid var(--w-faint);
         }
-        #value-root .row.hdr { height: 54px; font-size: 18px; font-weight: 700; letter-spacing: 0.02em; color: var(--w-mute); background: #fafafa; }
+        #value-root .row.hdr { height: 54px; font-size: 22px; font-weight: 700; letter-spacing: 0; color: var(--w-mute); background: #fafafa; }
         #value-root .row .tint { position: absolute; inset: 0; opacity: 0; }
         #value-root .c { position: relative; white-space: nowrap; }
-        #value-root .c1 { width: 132px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        #value-root .c1 { width: 144px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
         #value-root .c1 i { display: block; width: 14px; height: 14px; border-radius: 4px; background: var(--w-line); flex: 0 0 auto; }
-        #value-root .c2 { width: 232px; font-family: Inter, sans-serif; font-size: 21px; }
-        #value-root .c3 { width: 84px; color: var(--w-soft); }
-        #value-root .c4, #value-root .c5, #value-root .c6 { width: 86px; text-align: right; padding-right: 12px; }
-        #value-root .c5 { width: 92px; }
-        #value-root .c6 { width: 84px; }
-        #value-root .c6.hot { color: var(--w-risk); font-weight: 700; }
-        #value-root .c7 { width: 120px; display: flex; align-items: center; gap: 8px; padding-left: 4px; }
+        #value-root .c2 { width: 232px; font-family: Inter, sans-serif; font-size: 22px; font-weight: 500; }
+        #value-root .c3 { width: 88px; color: var(--w-soft); }
+        #value-root .c4, #value-root .c5, #value-root .c6 { width: 84px; text-align: right; padding-right: 12px; }
+        #value-root .c5 { width: 110px; }
+        #value-root .c6 { width: 96px; }
+        #value-root .c6.hot { color: #be123c; font-weight: 700; }
+        #value-root .c7 { width: 118px; display: flex; align-items: center; gap: 8px; padding-left: 4px; }
         #value-root .c7 .zb { position: relative; display: block; width: 46px; height: 12px; border-radius: 6px; background: #eef0f3; overflow: hidden; }
         #value-root .c7 .zb b { position: absolute; left: 0; top: 0; height: 12px; border-radius: 6px; }
         #value-root .c8 { width: 76px; text-align: right; padding-right: 14px; font-weight: 700; color: var(--w-model); }
         #value-root .c9 { width: 80px; color: var(--w-soft); }
-        #value-root .more { padding: 14px 28px 0; font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--w-mute); }
+        #value-root .more { padding: 12px 28px 0; font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--w-mute); }
         #value-root .totals {
           position: absolute; left: 0; bottom: 0; width: 100%; height: 66px; display: flex; align-items: center; gap: 14px; padding: 0 28px;
           background: #ecfdf5; border-top: 2px solid #a7f3d0; font-size: 23px; font-weight: 700; color: #065f46; white-space: nowrap;
@@ -64,15 +64,17 @@
         #value-root .totals svg { position: absolute; left: 6px; top: 6px; width: 16px; height: 16px; }
 
         /* scene */
-        #value-root .scene-lab { position: absolute; font-family: "JetBrains Mono", monospace; font-size: 20px; font-weight: 700; letter-spacing: 0.14em; color: var(--w-mute); white-space: nowrap; }
-        #value-root .floor { position: absolute; left: 1240px; top: 300px; width: 580px; height: 400px; border-radius: 24px; background: var(--w-faint); }
+        #value-root .scene-lab { position: absolute; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; letter-spacing: 0.14em; color: var(--w-mute); white-space: nowrap; }
+        #value-root .floor { position: absolute; left: 1240px; top: 350px; width: 580px; height: 350px; border-radius: 24px; background: var(--w-faint); }
         #value-root .src {
           position: absolute; top: 740px; height: 116px; border-radius: 20px; border: 3px solid var(--w-line); background: #fbfbfc;
           display: flex; flex-direction: column; justify-content: center; padding: 0 20px;
         }
-        #value-root .src .n { font-family: "JetBrains Mono", monospace; font-size: 20px; font-weight: 700; letter-spacing: 0.1em; color: var(--w-ink); white-space: nowrap; }
-        #value-root .src .d { margin-top: 4px; font-size: 21px; color: var(--w-soft); white-space: nowrap; }
+        #value-root .src .n { font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; letter-spacing: 0.1em; color: var(--w-ink); white-space: nowrap; }
+        #value-root .src .d { margin-top: 4px; font-size: 22px; font-weight: 500; color: var(--w-soft); white-space: nowrap; }
         #value-root svg.layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+        #value-root .subt { position: absolute; left: 120px; top: 248px; width: 1680px; font-size: 26px; font-weight: 500; color: var(--w-soft); }
+        #value-root .subt b { color: var(--w-ink); }
         #value-root .caption {
           position: absolute; left: 120px; top: 946px; width: 1700px; font-size: 30px; font-weight: 700; color: var(--w-ink);
         }
@@ -84,11 +86,12 @@
           <div class="kick" id="va-kick">07 · END-USER VALUE</div>
           <div class="ttl" id="va-ttl">What the <em>planner</em> gets</div>
           <div class="uline" id="va-ul"></div>
+          <div class="subt" id="va-sub">Today's buy list, most urgent first. <b>BOOKED</b> = customer orders already placed; <b>NET FLOW</b> = stock + open PO − booked.</div>
 
           <div class="sheet" id="va-sheet">
             <div class="sheet-head"><span id="va-head-l">PURCHASE ORDER PROPOSALS</span><span id="va-head-r"></span></div>
             <div class="row hdr" id="va-hdr">
-              <div class="c c1">SKU</div><div class="c c2" style="font-family: 'JetBrains Mono', monospace; font-size: 18px">PRODUCT</div>
+              <div class="c c1">SKU</div><div class="c c2" style="font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700">PRODUCT</div>
               <div class="c c3">FROM</div><div class="c c4">STOCK</div><div class="c c5">OPEN PO</div><div class="c c6">BOOKED</div>
               <div class="c c7">NET FLOW</div><div class="c c8">BUY</div><div class="c c9">DUE</div>
             </div>
@@ -97,7 +100,7 @@
             <div class="totals" id="va-totals"></div>
           </div>
 
-          <div class="scene-lab" id="va-lab-wh" style="left: 1240px; top: 266px">WAREHOUSE · NET FLOW PER SKU</div>
+          <div class="scene-lab" id="va-lab-wh" style="left: 1240px; top: 300px">WAREHOUSE · NET FLOW PER SKU</div>
           <div class="floor" id="va-floor"></div>
           <div class="src" id="va-src-l" style="left: 1240px; width: 270px"><div class="n">BLEND PLANT</div><div class="d">local · 5–14 days</div></div>
           <div class="src" id="va-src-i" style="left: 1550px; width: 270px"><div class="n">PORT</div><div class="d">imports · 45–90 days</div></div>
@@ -115,7 +118,8 @@
           const CONFIG = {
             duration: 13.0,
             colors: ["#6d3cf0", "#d97706", "#1f8fa8", "#2563eb"], // one per animated SKU
-            gauges: { x: [1404, 1510, 1616, 1722], top: 330, h: 270, w: 64 }, // x = gauge centre
+            textColors: ["#6d3cf0", "#b45309", "#0e7490", "#2563eb"], // same order, darkened to >= 4.5:1 for text
+            gauges: { x: [1404, 1510, 1616, 1722], top: 392, h: 208, w: 64 }, // x = gauge centre
             person: { x: 1296, y: 640 },
           };
           const FAMILY = {
@@ -193,9 +197,9 @@
             // net flow column: starts at today's position, rises by the order quantity
             const lvl = el("rect", { id: "va-lvl" + k, x: cx - 13, y: yOf(r.net_flow), width: 26, height: Math.max(0, bottom - yOf(r.net_flow)), rx: 4, fill: col }, g);
             const cap = el("rect", { x: cx - 18, y: yOf(r.net_flow) - 2, width: 36, height: 4, rx: 2, fill: "#111827" }, g);
-            const lab = el("text", { x: cx, y: bottom + 30, "text-anchor": "middle", "font-family": "JetBrains Mono, monospace", "font-size": 20, "font-weight": 700, fill: "#111827" }, g);
+            const lab = el("text", { x: cx, y: bottom + 30, "text-anchor": "middle", "font-family": "JetBrains Mono, monospace", "font-size": 22, "font-weight": 700, fill: "#111827" }, g);
             lab.textContent = r.sku.replace("LUB-", "#");
-            const qlab = el("text", { x: cx, y: G.top - 14, "text-anchor": "middle", "font-family": "JetBrains Mono, monospace", "font-size": 20, "font-weight": 700, fill: col, opacity: 0 }, g);
+            const qlab = el("text", { x: cx, y: G.top - 14, "text-anchor": "middle", "font-family": "JetBrains Mono, monospace", "font-size": 22, "font-weight": 700, fill: CONFIG.textColors[r.animate], opacity: 0 }, g);
             qlab.textContent = "+" + fmt(r.order_qty);
             const ok = el("g", { opacity: 0 }, g);
             el("circle", { cx: cx + G.w / 2 - 2, cy: G.top + 4, r: 13, fill: "#0f9f6e" }, ok);
@@ -233,6 +237,7 @@
           tl.fromTo("#va-kick", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.5);
           tl.fromTo("#va-ttl", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.55);
           tl.fromTo("#va-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.9);
+          tl.fromTo("#va-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.0);
           tl.fromTo("#va-sheet", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.8);
           SHEET.rows.forEach((_, i) => tl.fromTo("#va-r" + i, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 1.3 + i * 0.3));
           tl.fromTo("#va-more", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.3 + SHEET.rows.length * 0.3);
@@ -241,6 +246,8 @@
           tl.fromTo("#va-person", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.1);
           tl.fromTo("#va-paper", { rotation: 0 }, { rotation: -10, svgOrigin: CONFIG.person.x + 31 + " " + (CONFIG.person.y + 6), duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 7 }, 2.2);
           tl.fromTo("#va-caption", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 9.6);
+          // all text fades fully out before the wipe, so no two slides' text is ever on screen together
+          tl.to(["#va-kick", "#va-ttl", "#va-ul", "#va-sub", "#va-sheet", "#va-lab-wh", "#va-floor", "#va-src-l", "#va-src-i", "#va-svg", "#va-caption"], { opacity: 0, duration: 0.35, ease: "power2.in" }, D - 1.05);
           // wipe out (white -> dark), revealing the next dark scene underneath
           tl.to("#va-page", { clipPath: "inset(0px 0px 0px 100%)", duration: 0.7, ease: "power3.inOut" }, D - 0.7);
           tl.fromTo("#va-edge", { x: 0, opacity: 0 }, { x: 1920, opacity: 1, duration: 0.7, ease: "power3.inOut", immediateRender: false }, D - 0.7);

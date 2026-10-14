@@ -10,17 +10,17 @@
         #routes-root .title2 { opacity: 0; }
         /* phase A */
         #routes-root .panel {
-          position: absolute; left: 120px; width: 1240px; height: 370px; border-radius: 14px;
+          position: absolute; left: 120px; width: 1172px; height: 350px; border-radius: 14px;
           border: 2px solid var(--line); overflow: hidden; background: #0b1722;
         }
-        #routes-root .panel img { display: block; width: 1240px; height: 370px; }
-        #routes-root .scan { position: absolute; top: 0; left: 0; width: 1240px; height: 370px; background: #0b1722; transform-origin: right center; }
+        #routes-root .panel img { display: block; width: 1172px; height: 350px; }
+        #routes-root .scan { position: absolute; top: 0; left: 0; width: 1172px; height: 350px; background: #0b1722; transform-origin: right center; }
         #routes-root .side { position: absolute; left: 1410px; width: 390px; }
-        #routes-root .side .k { font-family: var(--mono); font-size: 22px; letter-spacing: 0.12em; color: var(--ink-mute); }
+        #routes-root .side .k { font-family: var(--mono); font-size: 22px; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-soft); }
         #routes-root .side .v { margin-top: 10px; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--ink); }
-        #routes-root .side .v small { display: block; margin-top: 8px; font-size: 24px; font-weight: 400; color: var(--ink-soft); }
+        #routes-root .side .v small { display: block; margin-top: 8px; font-size: 24px; font-weight: 500; color: var(--ink-soft); }
         #routes-root .keys { position: absolute; left: 1410px; top: 870px; display: flex; flex-wrap: wrap; gap: 10px 18px; width: 400px;
-          font-family: var(--mono); font-size: 20px; color: var(--ink-soft); }
+          font-family: var(--mono); font-size: 22px; color: var(--ink-soft); }
         #routes-root .keys span { display: flex; align-items: center; gap: 8px; }
         #routes-root .keys i { display: block; width: 18px; height: 14px; border-radius: 3px; }
         /* phase B */
@@ -43,7 +43,7 @@
         #routes-root .big .n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 84px; font-weight: 700; letter-spacing: -0.04em; color: var(--ink); }
         #routes-root .big .u { font-family: var(--mono); font-size: 30px; color: var(--ink-soft); }
         #routes-root .badge { font-family: var(--mono); font-size: 44px; font-weight: 700; color: #ffffff; background: var(--c-opt-deep); padding: 4px 18px; border-radius: 12px; }
-        #routes-root .foot { position: absolute; left: 120px; top: 840px; font-family: var(--mono); font-size: 24px; color: var(--ink-mute); }
+        #routes-root .foot { position: absolute; left: 120px; top: 840px; width: 1680px; font-size: 26px; font-weight: 500; color: var(--ink-soft); }
       </style>
 
       <div id="routes-root" data-composition-id="routes" data-width="1920" data-height="1080">
@@ -53,19 +53,20 @@
           <div class="scene-title title2" data-layout-allow-overlap id="routes-title2">Same fill rate as today, far less stock.</div>
 
           <div class="phase-a" id="routes-a">
-            <div class="panel" id="routes-p1" style="top: 222px">
+            <div class="scene-sub" id="routes-sub-a">Two products from the run. Bands = buffer zones; white line = stock on hand. Staying above red is good.</div>
+            <div class="panel" id="routes-p1" style="top: 240px">
               <img src="assets/buffer-local.png" alt="DDMRP buffer, local-blend runner" id="routes-img1" data-layout-allow-overflow />
               <div class="scan" id="routes-scan1"></div>
             </div>
-            <div class="panel" id="routes-p2" style="top: 610px">
+            <div class="panel" id="routes-p2" style="top: 612px">
               <img src="assets/buffer-import.png" alt="DDMRP buffer, imported runner" id="routes-img2" data-layout-allow-overflow />
               <div class="scan" id="routes-scan2"></div>
             </div>
-            <div class="side" id="routes-s1" style="top: 236px">
+            <div class="side" id="routes-s1" style="top: 250px">
               <div class="k">LOCAL BLEND · 5-DAY LEAD</div>
               <div class="v">Opening overstock burns off<small>then on-hand cycles through yellow and green</small></div>
             </div>
-            <div class="side" id="routes-s2" style="top: 624px">
+            <div class="side" id="routes-s2" style="top: 622px">
               <div class="k">IMPORT · 79-DAY LEAD</div>
               <div class="v">Big zones for a long lead time<small>late shipments still push it to zero</small></div>
             </div>
@@ -79,6 +80,7 @@
           </div>
 
           <div class="phase-b" id="routes-b">
+            <div class="scene-sub" id="routes-sub-b">Each line is one policy at different safety settings. At today's 98.46% fill rate, fewer days of stock is better.</div>
             <div class="chart" id="routes-chart"><img src="assets/frontier.png" alt="stock versus service frontier" id="routes-fimg" /></div>
             <svg class="ov" id="routes-ov" viewBox="0 0 1000 572"></svg>
             <div class="card" id="routes-card">
@@ -92,7 +94,7 @@
                 <div class="btrack"><div class="bfill" id="routes-f3" style="width: 278px; background: var(--c-opt)"></div></div></div>
               <div class="big"><span class="n" id="routes-num">97.6</span><span class="u">days</span><span class="badge" id="routes-badge">−47%</span></div>
             </div>
-            <div class="foot" id="routes-foot">each policy swept over its one safety knob, then read at the legacy fill rate</div>
+            <div class="foot" id="routes-foot">Reorder point run at 11 safety settings, DDMRP at 8; each is read where it gives today's fill rate (the rings).</div>
           </div>
         </div>
       </div>
@@ -105,6 +107,7 @@
           tl.fromTo("#routes-in", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
           tl.fromTo("#routes-eyebrow", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.1);
           tl.fromTo("#routes-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+          tl.fromTo("#routes-sub-a", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5);
 
           // ---- phase A: the two buffer panels draw left to right (a cover wipes off; no data redrawn)
           tl.fromTo("#routes-p1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.5);
@@ -118,11 +121,13 @@
 
           // ---- phase B: the frontier, read at the legacy fill rate
           const P2 = 6.8;
-          tl.to("#routes-a", { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, P2);
+          tl.to("#routes-a", { opacity: 0, y: -20, duration: 0.45, ease: "power2.in" }, P2);
           tl.to("#routes-title", { opacity: 0, duration: 0.3 }, P2);
-          tl.fromTo("#routes-title2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, P2 + 0.3);
-          tl.fromTo("#routes-b", { opacity: 0 }, { opacity: 1, duration: 0.01 }, P2 + 0.3);
-          tl.fromTo("#routes-chart", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, P2 + 0.4);
+          // phase B starts only after phase A has fully faded: no text from both phases on screen at once
+          tl.fromTo("#routes-title2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, P2 + 0.5);
+          tl.fromTo("#routes-b", { opacity: 0 }, { opacity: 1, duration: 0.01 }, P2 + 0.5);
+          tl.fromTo("#routes-sub-b", { opacity: 0 }, { opacity: 1, duration: 0.5 }, P2 + 0.6);
+          tl.fromTo("#routes-chart", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, P2 + 0.55);
 
           // overlay in the chart's own pixel space (frontier.png, 1950x1116 after darkmap, shown at 1000x572):
           // x = 332 + (fill% - 90) * 150.1 ; y = 968 - (DIO - 30) * 13.514  (tick positions of the axes)
@@ -132,9 +137,9 @@
           const el = (tag, attrs) => { const n = document.createElementNS(NS, tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); ov.appendChild(n); return n; };
           const xL = X(98.46);
           const vline = el("line", { x1: xL, x2: xL, y1: Y(100), y2: Y(30), stroke: "#3fd8a8", "stroke-width": 3, "stroke-dasharray": "8 7", opacity: 0 });
-          const vlab = el("text", { x: xL - 12, y: Y(30) - 14, "text-anchor": "end", fill: "#3fd8a8", "font-family": "JetBrains Mono, monospace", "font-size": 20, "font-weight": 700, opacity: 0 });
+          const vlab = el("text", { x: xL - 12, y: Y(30) - 14, "text-anchor": "end", fill: "#3fd8a8", "font-family": "JetBrains Mono, monospace", "font-size": 22, "font-weight": 700, opacity: 0 });
           vlab.textContent = "legacy fill 98.46%";
-          const pts = [[97.6, "#b2bfcc"], [65.9, "#7fa8ff"], [52.1, "#3fd8a8"]];
+          const pts = [[97.6, "#c8d3de"], [65.9, "#7fa8ff"], [52.1, "#3fd8a8"]];
           const rings = pts.map(([d, c]) => el("circle", { cx: xL, cy: Y(d), r: 11, fill: "none", stroke: c, "stroke-width": 3.5, opacity: 0 }));
           tl.fromTo(vline, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.5 }, P2 + 1.3);
           tl.fromTo(vline, { attr: { y2: Y(100) } }, { attr: { y2: Y(30) }, duration: 0.8, ease: "power2.inOut" }, P2 + 1.3);
@@ -150,7 +155,7 @@
           tl.to(num, { v: 52.1, duration: 2.0, ease: "power2.inOut", onUpdate: () => { nEl.textContent = num.v.toFixed(1); } }, P2 + 2.4);
           tl.fromTo("#routes-badge", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, P2 + 4.5);
           tl.fromTo("#routes-foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, P2 + 4.8);
-          tl.to("#routes-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          tl.to("#routes-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.8); // dip: fully out before the next scene starts
           window.__timelines["routes"] = tl;
         })();
       </script>

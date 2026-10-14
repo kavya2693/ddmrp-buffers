@@ -8,8 +8,10 @@
            Per repo, edit only the CONFIG object in the script below (and slide B's markup if the key idea differs). */
         #explainer-root {
           position: absolute; inset: 0;
-          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #6b7280; --w-line: #d1d5db;
+          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #4b5563; --w-line: #d1d5db;
           --w-data: #d97706; --w-model: #6d3cf0; --w-tools: #1f8fa8; --w-risk: #dc2b4a; --w-opt: #0f9f6e; --w-eval: #b45309;
+          /* text versions of the layer colours: every one is >= 4.5:1 on white (the fills above are for tiles only) */
+          --w-data-t: #b45309; --w-model-t: #6d3cf0; --w-tools-t: #0e7490; --w-risk-t: #be123c; --w-opt-t: #047857;
           color: var(--w-ink); font-family: Inter, "Helvetica Neue", sans-serif;
         }
         #explainer-root .page { position: absolute; inset: 0; background: var(--w-bg); }
@@ -45,12 +47,12 @@
         #explainer-root .box { position: absolute; border: 3px solid var(--w-line); border-radius: 28px; }
         #explainer-root .pill {
           position: absolute; left: 28px; top: -22px; padding: 6px 18px; border-radius: 999px; background: var(--w-bg);
-          border: 3px solid var(--w-line); font-family: "JetBrains Mono", monospace; font-size: 20px; font-weight: 700;
+          border: 3px solid var(--w-line); font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700;
           letter-spacing: 0.14em; color: var(--w-soft); white-space: nowrap;
         }
         #explainer-root .loop { position: absolute; width: 84px; height: 84px; }
         #explainer-root .loop-lab {
-          position: absolute; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; color: var(--w-opt); white-space: nowrap;
+          position: absolute; font-family: "JetBrains Mono", monospace; font-size: 24px; font-weight: 700; color: var(--w-opt-t); white-space: nowrap;
         }
         #explainer-root .badges { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
         #explainer-root .badge { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; color: var(--w-ink); white-space: nowrap; }
@@ -72,7 +74,7 @@
         #explainer-root .z-red { width: 244px; background: #f6a5ad; }
         #explainer-root .z-yel { width: 233px; background: #fbd78a; }
         #explainer-root .z-grn { width: 163px; background: #9fdcbf; }
-        #explainer-root .tick { position: absolute; top: 222px; width: 160px; margin-left: -80px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 20px; font-weight: 700; color: var(--w-soft); }
+        #explainer-root .tick { position: absolute; top: 222px; width: 160px; margin-left: -80px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; color: var(--w-soft); }
         #explainer-root .needle { position: absolute; left: 50px; top: 126px; width: 6px; height: 98px; margin-left: -3px; border-radius: 3px; background: var(--w-ink); }
         #explainer-root .ntag {
           position: absolute; left: 50px; top: 74px; width: 220px; margin-left: -110px; text-align: center; font-family: "JetBrains Mono", monospace;
@@ -82,8 +84,9 @@
         #explainer-root .dchip { display: block; padding: 8px 16px; border-radius: 10px; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; background: #eef1f5; color: var(--w-soft); border: 2px solid var(--w-line); }
         #explainer-root .dchip.spike { background: var(--w-risk); border-color: var(--w-risk); color: #fff; }
         #explainer-root .verdict { position: absolute; left: 50px; top: 350px; width: 710px; font-size: 28px; line-height: 1.35; color: var(--w-ink); }
-        #explainer-root .verdict b { color: var(--w-opt); }
+        #explainer-root .verdict b { color: var(--w-opt-t); }
         #explainer-root .verdict span { display: block; color: var(--w-soft); font-weight: 400; }
+        #explainer-root .subt { position: absolute; left: 120px; top: 252px; width: 1680px; font-size: 28px; font-weight: 500; color: var(--w-soft); }
         #explainer-root .foot {
           position: absolute; left: 120px; top: 880px; font-family: "JetBrains Mono", monospace; font-size: 24px; color: var(--w-soft);
         }
@@ -94,16 +97,18 @@
           <!-- SLIDE A: the flow -->
           <div class="slide" id="ex-a">
             <div class="kick" id="ex-a-kick">03 · HOW IT WORKS</div>
-            <div class="ttl" id="ex-a-ttl">From sales history to <em style="color: var(--w-opt)">orders</em></div>
+            <div class="ttl" id="ex-a-ttl">From sales history to <em style="color: var(--w-opt-t)">orders</em></div>
             <div class="uline" id="ex-a-ul" style="background: var(--w-opt)"></div>
+            <div class="subt" id="ex-a-sub">Read left to right. Fill rate = share of demand shipped on the day it was due; higher is better.</div>
             <div id="ex-a-flow"></div>
           </div>
 
           <!-- SLIDE B: the one key idea -->
           <div class="slide" id="ex-b">
             <div class="kick" id="ex-b-kick">04 · THE KEY IDEA</div>
-            <div class="ttl" id="ex-b-ttl">Seeing big orders <em style="color: var(--w-risk)">early</em></div>
+            <div class="ttl" id="ex-b-ttl">Seeing big orders <em style="color: var(--w-risk-t)">early</em></div>
             <div class="uline" id="ex-b-ul" style="background: var(--w-risk)"></div>
+            <div class="subt" id="ex-b-sub">Net flow = the stock you can really count on. At yellow or below, reorder up to the top of green.</div>
             <div class="steps">
               <div class="step" id="ex-b-s1"><div class="tile" style="background: var(--w-data)" data-icon="archive"></div>
                 <div class="txt">Fleet customers book big orders early<small>3 to 21 days before they ship</small></div></div>
@@ -126,7 +131,7 @@
               </div>
               <div class="verdict" id="ex-b-verdict">Order <b>144</b> = 275 − 140, in cases of 12. <span>Without the customer order: 108.</span></div>
             </div>
-            <div class="foot" id="ex-b-foot">Switch it off and DDMRP falls to the reorder point's fill rate: 94.49% vs 94.51% (year 2).</div>
+            <div class="foot" id="ex-b-foot">Without this step, DDMRP only matches a classic reorder point: fill rate 94.49% vs 94.51% (year 2).</div>
           </div>
         </div>
         <div class="edge" id="ex-edge"></div>
@@ -141,12 +146,12 @@
             blocks: [
               // x = block centre; colour = layer; icon = key in ICONS
               { x: 260, label: "SALES HISTORY", sub: "800 SKUs, every day", color: "--w-data", icon: "archive" },
-              { x: 545, label: "DEMAND RATE", sub: "84-day average", color: "--w-model", icon: "sparkle" },
+              { x: 545, label: "DEMAND RATE", sub: "average daily sales, last 84 days", color: "--w-model", icon: "sparkle" },
               { x: 825, label: "BUFFERS", sub: "red, yellow and green zones", color: "--w-tools", icon: "layers" },
               { x: 1115, label: "NET FLOW", sub: "stock + incoming − big orders", color: "--w-risk", icon: "shield" },
               { x: 1395, label: "REORDER", sub: "fill back up to green", color: "--w-opt", icon: "refill" },
               { x: 1675, label: "ORDERS OUT", sub: "", color: "--w-opt", icon: "doc",
-                badges: ["47% less stock", "same fill rate", "case + MOQ"] },
+                badges: ["47% less stock", "same fill rate", "full cases"] },
             ],
             groups: [
               // rounded containers with a pill label, spanning block indexes [from, to]
@@ -189,7 +194,7 @@
             }
             const col = "var(" + b.color + ")";
             let inner = '<div class="tile" style="background:' + col + '">' + svgIcon(b.icon) + "</div>" +
-              '<div class="lab" style="color:' + col + '">' + b.label + "</div>";
+              '<div class="lab" style="color:var(' + b.color + '-t)">' + b.label + "</div>";
             if (b.sub) inner += '<div class="sub">' + b.sub + "</div>";
             if (b.badges) inner += '<div class="badges">' + b.badges.map((t, k) => '<div class="badge" id="ex-bd' + k + '"><i>' + CHECK + "</i>" + t + "</div>").join("") + "</div>";
             html.push('<div class="blk" id="ex-b' + i + '" style="left:' + (b.x - W / 2) + "px;top:" + TILE_TOP + 'px">' + inner + "</div>");
@@ -212,6 +217,7 @@
           tl.fromTo("#ex-a-kick", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.5);
           tl.fromTo("#ex-a-ttl", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.55);
           tl.fromTo("#ex-a-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.9);
+          tl.fromTo("#ex-a-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.0);
           const STEP = 0.55, S0 = 1.3;
           CONFIG.blocks.forEach((b, i) => {
             const at = S0 + i * STEP;
@@ -232,6 +238,7 @@
           tl.fromTo("#ex-b-kick", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, B);
           tl.fromTo("#ex-b-ttl", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, B + 0.05);
           tl.fromTo("#ex-b-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, B + 0.4);
+          tl.fromTo("#ex-b-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, B + 0.45);
           ["#ex-b-s1", "#ex-b-s2", "#ex-b-s3"].forEach((s, i) =>
             tl.fromTo(s, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, B + 0.6 + i * 0.5));
           tl.fromTo("#ex-b-demo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, B + 0.7);
@@ -245,6 +252,8 @@
           tl.to(nv, { v: 140, duration: 0.9, ease: "power2.inOut", onUpdate: () => { nEl.textContent = Math.round(nv.v); } }, SW + 0.5);
           tl.fromTo("#ex-b-verdict", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, SW + 1.6);
           tl.fromTo("#ex-b-foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, SW + 2.0);
+          // slide B text fades fully out before the wipe, so no two slides' text is ever on screen together
+          tl.to("#ex-b", { opacity: 0, duration: 0.35, ease: "power2.in" }, D - 1.05);
           // wipe out (white -> dark), revealing the next dark scene underneath
           tl.to("#ex-page", { clipPath: "inset(0px 0px 0px 100%)", duration: 0.7, ease: "power3.inOut" }, D - 0.7);
           tl.fromTo("#ex-edge", { x: 0, opacity: 0 }, { x: 1920, opacity: 1, duration: 0.7, ease: "power3.inOut", immediateRender: false }, D - 0.7);

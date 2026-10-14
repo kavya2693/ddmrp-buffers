@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-14 14:20",
+ "generated": "2026-10-14 18:39",
  "commit": "ef2e4977bbb5278cf24e612031c686ff3d296161",
  "checks": [
   {
@@ -52,7 +52,7 @@
   },
   {
    "id": "F-07",
-   "shown": "45\u201390 d lead",
+   "shown": "45\u201390 d to arrive",
    "type": "direct",
    "computed": "45\u201390",
    "expect": "45\u201390",
@@ -60,7 +60,7 @@
   },
   {
    "id": "F-08",
-   "shown": "4,702 bulk orders",
+   "shown": "4,702 big orders",
    "type": "direct",
    "computed": "4,702",
    "expect": "4,702",
@@ -68,7 +68,7 @@
   },
   {
    "id": "F-09",
-   "shown": "3\u201321 d notice / 3 to 21 days before they ship",
+   "shown": "booked 3\u201321 d ahead / 3 to 21 days before they ship",
    "type": "direct",
    "computed": "3\u201321",
    "expect": "3\u201321",
@@ -84,7 +84,7 @@
   },
   {
    "id": "F-11",
-   "shown": "84-day average / ADU 84 d / 84-d window",
+   "shown": "average daily sales, last 84 days / avg daily sales, 84 d / 84-d window",
    "type": "direct",
    "computed": "true",
    "expect": "true",
@@ -108,7 +108,7 @@
   },
   {
    "id": "F-14",
-   "shown": "47% less stock / same fill rate / case + MOQ",
+   "shown": "47% less stock / same fill rate / full cases",
    "type": "derived",
    "computed": "true",
    "expect": "true",
@@ -156,7 +156,7 @@
   },
   {
    "id": "F-20",
-   "shown": "1,096 d \u00d7 800 / 2023: 4.7% missing",
+   "shown": "1,096 days \u00d7 800 / 2023: 4.7% missing",
    "type": "direct",
    "computed": "1,096 d, 4.7%",
    "expect": "1,096 d, 4.7%",
@@ -164,7 +164,7 @@
   },
   {
    "id": "F-21",
-   "shown": "+14\u201335 d holds",
+   "shown": "+14\u201335 d at port",
    "type": "direct",
    "computed": "true",
    "expect": "true",
@@ -172,7 +172,7 @@
   },
   {
    "id": "F-22",
-   "shown": "ADU 84 d \u00b7 LTF \u00b7 VF / red \u00b7 yellow \u00b7 green / \u2264 TOY? yes: up to TOG",
+   "shown": "avg daily sales, 84 d / red \u00b7 yellow \u00b7 green / \u2264 yellow? yes: refill up to green, in full cases",
    "type": "direct",
    "computed": "true",
    "expect": "true",
@@ -180,7 +180,7 @@
   },
   {
    "id": "F-23",
-   "shown": "4 classes \u00b7 180 d",
+   "shown": "4 classes \u00b7 last 180 d",
    "type": "direct",
    "computed": "true",
    "expect": "true",
@@ -196,7 +196,7 @@
   },
   {
    "id": "F-25",
-   "shown": "11 z \u00b7 8 red sizes",
+   "shown": "11 + 8 safety settings / Reorder point run at 11 safety settings, DDMRP at 8",
    "type": "direct",
    "computed": "11 z, 8 red",
    "expect": "11 z, 8 red",
@@ -204,7 +204,7 @@
   },
   {
    "id": "F-26",
-   "shown": "+ 3 fresh ranges / 4 ranges",
+   "shown": "+ 3 new datasets / 4 datasets",
    "type": "direct",
    "computed": "true",
    "expect": "true",
@@ -388,42 +388,42 @@
   },
   {
    "id": "F-49",
-   "shown": "96.61% \u00b7 39.9 d",
+   "shown": "2.49 M / 2.50 M / 1.54 M",
    "type": "direct",
-   "computed": "96.61% \u00b7 39.9 d",
-   "expect": "96.61% \u00b7 39.9 d",
+   "computed": "2.49 M / 2.50 M / 1.54 M",
+   "expect": "2.49 M / 2.50 M / 1.54 M",
    "status": "pass"
   },
   {
    "id": "F-50",
-   "shown": "94.49% \u00b7 39.8 d",
-   "type": "direct",
-   "computed": "94.49% \u00b7 39.8 d",
-   "expect": "94.49% \u00b7 39.8 d",
+   "shown": "about 40 days of stock / ~40 days of stock",
+   "type": "derived",
+   "computed": "true",
+   "expect": "true",
    "status": "pass"
   },
   {
    "id": "F-51",
-   "shown": "94.51% \u00b7 40.1 d",
-   "type": "direct",
-   "computed": "94.51% \u00b7 40.1 d",
-   "expect": "94.51% \u00b7 40.1 d",
+   "shown": "\u221238%",
+   "type": "derived",
+   "computed": "-38%",
+   "expect": "-38%",
    "status": "pass"
   },
   {
    "id": "F-52",
-   "shown": "13.6% of demand value",
+   "shown": "policies.py: an order of at least half the red zone, due within the lead time, cuts net flow at once. On by default.",
    "type": "direct",
-   "computed": "13.6%",
-   "expect": "13.6%",
+   "computed": "true",
+   "expect": "true",
    "status": "pass"
   },
   {
    "id": "F-53",
-   "shown": "about 70%",
-   "type": "derived",
-   "computed": "70%",
-   "expect": "70%",
+   "shown": "52.1 vs 65.9 days",
+   "type": "direct",
+   "computed": "52.1 vs 65.9",
+   "expect": "52.1 vs 65.9",
    "status": "pass"
   },
   {

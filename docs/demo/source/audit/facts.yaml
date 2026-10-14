@@ -17,7 +17,7 @@ project:
   demo_display: docs/demo/source
   out_dir: ../..
   video: docs/demo/demo.mp4
-  video_duration_s: 86.4
+  video_duration_s: 89.2
   outputs_dir: outputs
   venv_python: .venv/bin/python
   version_packages: [numpy, pandas, matplotlib]
@@ -42,25 +42,25 @@ assumptions:
   - id: A-02
     statement: "Bulk fleet orders are announced 3 to 21 days before they ship: 60% of SKUs packed in 18 L or more get 2-8 such orders a year (15% of the rest get 2). Their share (13.6% of demand value) and notice period are generator choices, not measurements; DDMRP's edge over the reorder point depends on them."
     source: "src/ddmrp_buffers/data.py:154-171; README 'Known limitations' (the biggest gap)"
-    figures: [F-08, F-09, F-16, F-17, F-18, F-36, F-37, F-38, F-49, F-50, F-51, F-52]
+    figures: [F-08, F-09, F-16, F-17, F-18, F-36, F-37, F-38, F-49, F-51]
     edit: ["src/ddmrp_buffers/data.py:157-169"]
     rerun: ["make data", "make run", "export_po_sheet.py + inject_sheet.py"]
   - id: A-03
     statement: "Unfilled demand is lost, not backordered (a workshop buys the drum elsewhere). Fill rate is the share of demand value shipped on the day it was due."
     source: "src/ddmrp_buffers/simulate.py:81-83; metrics.py:27; docs/adr/0001-compare-at-matched-service.md"
-    figures: [F-18, F-29, F-33, F-34, F-43, F-44, F-49, F-50, F-51, F-53]
+    figures: [F-18, F-29, F-33, F-34, F-43, F-44, F-49, F-51, F-53]
     edit: ["src/ddmrp_buffers/simulate.py:81-83"]
     rerun: ["make run"]
   - id: A-04
     statement: "Lead times: local blends 5-14 days, imports 45-90 days. Realised lead times drift (sd 15% blends, 10% imports) and 10% of import orders are held at the port for 14-35 extra days."
     source: "src/ddmrp_buffers/data.py:109-114; simulate.py:42-51 (actual_lead_times)"
-    figures: [F-07, F-21, F-33, F-34, F-41, F-44, F-49, F-50, F-51]
+    figures: [F-07, F-21, F-33, F-34, F-41, F-44, F-49, F-50, F-51, F-53]
     edit: ["src/ddmrp_buffers/data.py:109-114", "src/ddmrp_buffers/simulate.py:46-50"]
     rerun: ["make data", "make run"]
   - id: A-05
     statement: "DDMRP settings: 84-day ADU window, buffers recalculated every 7 days, lead-time factor 0.7 / 0.5 / 0.3 by lead-time band, variability factor 0.3 / 0.5 / 0.8 by weekly CV, a customer order counts early if it is at least half the red zone and due within the lead time, order cycle 7 days (blend) / 30 days (import)."
     source: "src/ddmrp_buffers/config.py:22-41 (DdmrpSettings)"
-    figures: [F-11, F-12, F-22, F-33, F-34, F-36, F-37, F-38, F-40, F-42, F-43, F-44, F-49, F-50]
+    figures: [F-11, F-12, F-22, F-33, F-34, F-36, F-37, F-38, F-40, F-42, F-43, F-44, F-49, F-50, F-51, F-52, F-53]
     edit: ["src/ddmrp_buffers/config.py:24-41"]
     rerun: ["make run", "export_po_sheet.py + inject_sheet.py"]
   - id: A-06
@@ -72,7 +72,7 @@ assumptions:
   - id: A-07
     statement: "Tuned reorder point: z = 1.88 (97% cycle service), same 84-day window, weekly recalculation and order cycle as DDMRP. The safety knobs are swept over 11 z values (0.84-5.5) and 8 DDMRP red-zone multipliers (0.5-4.0)."
     source: "src/ddmrp_buffers/config.py:53-61; cli.py:14-15 (ROP_Z_SWEEP, DDMRP_RED_SWEEP)"
-    figures: [F-25, F-27, F-33, F-34, F-43, F-44, F-51, F-53]
+    figures: [F-25, F-27, F-33, F-34, F-43, F-44, F-49, F-50, F-53]
     edit: ["src/ddmrp_buffers/config.py:59", "src/ddmrp_buffers/cli.py:14-15"]
     rerun: ["make run"]
   - id: A-08
@@ -106,9 +106,9 @@ assumptions:
     edit: ["src/ddmrp_buffers/metrics.py"]
     rerun: ["make run"]
   - id: A-13
-    statement: "Video rounding: days to 1 decimal, fill rates to 2 decimals, headline percentages to whole numbers, money to 0.1 M or whole units; '~20 s', 'about 70%' and '60%' are rounded labels."
+    statement: "Video rounding: days to 1 decimal, fill rates to 2 decimals, headline percentages to whole numbers, money to 0.01 M, 0.1 M or whole units; '~20 s', 'about 40 days' and '60%' are rounded labels."
     source: "this audit (display convention)"
-    figures: [F-04, F-05, F-06, F-10, F-14, F-20, F-34, F-43, F-46, F-52, F-53]
+    figures: [F-04, F-05, F-06, F-10, F-14, F-20, F-34, F-43, F-46, F-49, F-50, F-51]
     edit: ["the composition file named on each slide"]
     rerun: ["hyperframes render"]
   - id: A-14
@@ -132,22 +132,22 @@ figures:
      check: {expr: "J('outputs/results.json')['opening_dio_days']", fmt: "{:.0f}", expect: "172"}}
   - {id: F-06, slides: ["02"], label: "Share of SKUs imported", shown: "26% imports", type: direct, source: "outputs/results.json", key: "dataset.import_share = 0.26375", formula: "x 100",
      check: {expr: "J('outputs/results.json')['dataset']['import_share'] * 100", fmt: "{:.0f}%", expect: "26%"}}
-  - {id: F-07, slides: ["02"], label: "Import lead times", shown: "45–90 d lead", type: direct, source: "data/skus.csv", key: "lead_time_days where source = import (min, max)", formula: "-",
+  - {id: F-07, slides: ["02"], label: "Import lead times", shown: "45–90 d to arrive", type: direct, source: "data/skus.csv", key: "lead_time_days where source = import (min, max)", formula: "-",
      check: {expr: "(lambda s: f\"{s.min()}–{s.max()}\")(R('data/skus.csv').query(\"source == 'import'\")['lead_time_days'])", fmt: "{}", expect: "45–90"}}
-  - {id: F-08, slides: ["02", "05"], label: "Bulk fleet orders in the data", shown: "4,702 bulk orders", type: direct, source: "outputs/results.json; data/bulk_orders.csv", key: "dataset.bulk_orders", formula: "-",
+  - {id: F-08, slides: ["02", "05"], label: "Bulk fleet orders in the data", shown: "4,702 big orders", type: direct, source: "outputs/results.json; data/bulk_orders.csv", key: "dataset.bulk_orders", formula: "-",
      check: {expr: "J('outputs/results.json')['dataset']['bulk_orders']", fmt: "{:,.0f}", expect: "4,702"}}
-  - {id: F-09, slides: ["02", "04", "05"], label: "Bulk-order notice period", shown: "3–21 d notice / 3 to 21 days before they ship", type: direct, source: "data/bulk_orders.csv", key: "due_date - placed_date (min, max)", formula: "-",
+  - {id: F-09, slides: ["02", "04"], label: "Bulk-order notice period", shown: "booked 3–21 d ahead / 3 to 21 days before they ship", type: direct, source: "data/bulk_orders.csv", key: "due_date - placed_date (min, max)", formula: "-",
      check: {expr: "(lambda b: (lambda d: f\"{d.min()}–{d.max()}\")((pd.to_datetime(b['due_date']) - pd.to_datetime(b['placed_date'])).dt.days))(R('data/bulk_orders.csv'))", fmt: "{}", expect: "3–21"}}
   - {id: F-10, slides: ["02"], label: "Share of simulated SKU-days with no demand", shown: "60% of SKU-days sell nothing", type: direct, source: "outputs/results.json", key: "dataset.zero_demand_day_share = 0.5968", formula: "x 100, whole number",
      check: {expr: "J('outputs/results.json')['dataset']['zero_demand_day_share'] * 100", fmt: "{:.0f}%", expect: "60%"}}
   # ---- slide 03
-  - {id: F-11, slides: ["03", "05"], label: "Demand rate = average daily usage over 84 days", shown: "84-day average / ADU 84 d / 84-d window", type: direct, source: "src/ddmrp_buffers/config.py:24", key: "adu_window_days = 84", formula: "-",
+  - {id: F-11, slides: ["03", "05"], label: "Demand rate = average daily usage over 84 days", shown: "average daily sales, last 84 days / avg daily sales, 84 d / 84-d window", type: direct, source: "src/ddmrp_buffers/config.py:24", key: "adu_window_days = 84", formula: "-",
      check: {expr: "grep('src/ddmrp_buffers/config.py', r'adu_window_days: int = 84')", fmt: bool}}
   - {id: F-12, slides: ["03", "05"], label: "Buffers recalculated every 7 days", shown: "EVERY 7 DAYS / weekly", type: direct, source: "src/ddmrp_buffers/config.py:25; policies.py:154", key: "recalc_every_days = 7", formula: "-",
      check: {expr: "grep('src/ddmrp_buffers/config.py', r'recalc_every_days: int = 7')", fmt: bool}}
   - {id: F-13, slides: ["03", "05"], label: "Net flow and the order decision run every day for every SKU", shown: "EVERY DAY / all 800 SKUs, daily / per-day call", type: direct, source: "src/ddmrp_buffers/simulate.py:77-88", key: "for t in range(n_days): ... policy.order(...)", formula: "-",
      check: {expr: "grep('src/ddmrp_buffers/simulate.py', r'for t in range\\(n_days\\)') and grep('src/ddmrp_buffers/simulate.py', r'policy\\.order\\(s \\+ t')", fmt: bool}}
-  - {id: F-14, slides: ["03"], label: "Outcome badges: 47% less stock, same fill rate, rounded to case + MOQ", shown: "47% less stock / same fill rate / case + MOQ", type: derived, source: "outputs/results.json; src/ddmrp_buffers/buffers.py:104-106", key: "matched_service DDMRP vs legacy year-2 DIO; round_up", formula: "(1 - 52.14 / 97.64) x 100 = 46.6% -> 47%; DIO read at the legacy fill rate (A-08)",
+  - {id: F-14, slides: ["03"], label: "Outcome badges: 47% less stock, same fill rate, rounded to full cases (and MOQ)", shown: "47% less stock / same fill rate / full cases", type: derived, source: "outputs/results.json; src/ddmrp_buffers/buffers.py:104-106", key: "matched_service DDMRP vs legacy year-2 DIO; round_up", formula: "(1 - 52.14 / 97.64) x 100 = 46.6% -> 47%; DIO read at the legacy fill rate (A-08)",
      check: {expr: "round((1 - J('outputs/results.json')['matched_service']['dio_at_target']['DDMRP'] / J('outputs/results.json')['policies']['min-max (legacy)']['year_2']['dio_days']) * 100) == 47 and grep('src/ddmrp_buffers/buffers.py', r'def round_up')", fmt: bool}}
   # ---- slide 04
   - {id: F-15, slides: ["04"], label: "Net flow = on hand + on order - qualified customer orders", shown: "on hand + on order − orders already placed", type: direct, source: "src/ddmrp_buffers/buffers.py:99-101; policies.py:160-165", key: "net_flow()", formula: "-",
@@ -161,25 +161,25 @@ figures:
   # ---- slide 05
   - {id: F-19, slides: ["05"], label: "Generator seed", shown: "seed 20240101", type: direct, source: "src/ddmrp_buffers/config.py:8", key: "SEED", formula: "-",
      check: {expr: "grep('src/ddmrp_buffers/config.py', r'^SEED = 20240101')", fmt: bool}}
-  - {id: F-20, slides: ["05"], label: "Days of demand in demand.csv.gz; share of 2023 history missing", shown: "1,096 d × 800 / 2023: 4.7% missing", type: direct, source: "outputs/results.json", key: "dataset.days_total, dataset.history_missing_share", formula: "-",
+  - {id: F-20, slides: ["05"], label: "Days of demand in demand.csv.gz; share of 2023 history missing", shown: "1,096 days × 800 / 2023: 4.7% missing", type: direct, source: "outputs/results.json", key: "dataset.days_total, dataset.history_missing_share", formula: "-",
      check: {expr: "'{:,.0f} d, {:.1f}%'.format(J('outputs/results.json')['dataset']['days_total'], J('outputs/results.json')['dataset']['history_missing_share'] * 100)", fmt: "{}", expect: "1,096 d, 4.7%"}}
-  - {id: F-21, slides: ["05"], label: "Port holds on imports", shown: "+14–35 d holds", type: direct, source: "src/ddmrp_buffers/simulate.py:49-50", key: "10% of import orders held rng.integers(14, 36) days", formula: "-",
+  - {id: F-21, slides: ["05"], label: "Port holds on imports", shown: "+14–35 d at port", type: direct, source: "src/ddmrp_buffers/simulate.py:49-50", key: "10% of import orders held rng.integers(14, 36) days", formula: "-",
      check: {expr: "grep('src/ddmrp_buffers/simulate.py', r'< 0.10\\) & ctx.is_import') and grep('src/ddmrp_buffers/simulate.py', r'rng.integers\\(14, 36')", fmt: bool}}
-  - {id: F-22, slides: ["05"], label: "Buffer sizing inputs: ADU, LTF, VF -> red, yellow, green; net flow; order up to top of green", shown: "ADU 84 d · LTF · VF / red · yellow · green / ≤ TOY? yes: up to TOG", type: direct, source: "src/ddmrp_buffers/buffers.py:35-119", key: "average_daily_usage, lead_time_factor, variability_factor, zones, net_flow, order_quantity", formula: "-",
+  - {id: F-22, slides: ["05"], label: "Buffer sizing inputs: ADU, LTF, VF -> red, yellow, green; net flow; order up to top of green", shown: "avg daily sales, 84 d / red · yellow · green / ≤ yellow? yes: refill up to green, in full cases", type: direct, source: "src/ddmrp_buffers/buffers.py:35-119", key: "average_daily_usage, lead_time_factor, variability_factor, zones, net_flow, order_quantity", formula: "-",
      check: {expr: "all(grep('src/ddmrp_buffers/buffers.py', r'def ' + f) for f in ['average_daily_usage', 'lead_time_factor', 'variability_factor', 'zones', 'net_flow', 'order_quantity']) and grep('src/ddmrp_buffers/buffers.py', r'np.where\\(nfp <= line, z.tog - nfp')", fmt: bool}}
-  - {id: F-23, slides: ["05"], label: "Slow-mover classes over 180 days", shown: "4 classes · 180 d", type: direct, source: "src/ddmrp_buffers/classify.py:13-14; config.py:66", key: "RUNNER, REPEATER, STRANGER, DORMANT; window_days = 180", formula: "-",
+  - {id: F-23, slides: ["05"], label: "Slow-mover classes over 180 days", shown: "4 classes · last 180 d", type: direct, source: "src/ddmrp_buffers/classify.py:13-14; config.py:66", key: "RUNNER, REPEATER, STRANGER, DORMANT; window_days = 180", formula: "-",
      check: {expr: "grep('src/ddmrp_buffers/classify.py', r'RUNNER, REPEATER, STRANGER, DORMANT = 0, 1, 2, 3') and grep('src/ddmrp_buffers/config.py', r'window_days: int = 180')", fmt: bool}}
   - {id: F-24, slides: ["05", "08"], label: "Simulated days", shown: "day 731 / 731 · 731 simulated days", type: direct, source: "outputs/results.json", key: "dataset.days_simulated", formula: "-",
      check: {expr: "J('outputs/results.json')['dataset']['days_simulated']", fmt: "{:.0f}", expect: "731"}}
-  - {id: F-25, slides: ["05"], label: "Sweep sizes", shown: "11 z · 8 red sizes", type: direct, source: "src/ddmrp_buffers/cli.py:14-15", key: "len(ROP_Z_SWEEP), len(DDMRP_RED_SWEEP)", formula: "-",
+  - {id: F-25, slides: ["05", "06"], label: "Sweep sizes (reorder-point z values, DDMRP red-zone multipliers)", shown: "11 + 8 safety settings / Reorder point run at 11 safety settings, DDMRP at 8", type: direct, source: "src/ddmrp_buffers/cli.py:14-15", key: "len(ROP_Z_SWEEP), len(DDMRP_RED_SWEEP)", formula: "-",
      check: {expr: "sweep_sizes()", fmt: "{}", expect: "11 z, 8 red"}}
-  - {id: F-26, slides: ["05", "08"], label: "Fresh ranges (extra seeds) on top of the main one", shown: "+ 3 fresh ranges / 4 ranges", type: direct, source: "outputs/results.json robustness; cli.py:252", key: "len(robustness) = 4 (main + 3)", formula: "-",
+  - {id: F-26, slides: ["05", "08"], label: "Fresh ranges (extra seeds) on top of the main one", shown: "+ 3 new datasets / 4 datasets", type: direct, source: "outputs/results.json robustness; cli.py:252", key: "len(robustness) = 4 (main + 3)", formula: "-",
      check: {expr: "len(J('outputs/results.json')['robustness']) == 4 and grep('src/ddmrp_buffers/cli.py', r'\"--extra-seeds\", type=int, default=3')", fmt: bool}}
   - {id: F-27, slides: ["05"], label: "Two-year simulations per make run", shown: "×90 / 90 runs", type: derived, source: "src/ddmrp_buffers/cli.py:18-25, 76-93, 120-131, 175-177", key: "5 arms + 19 sweep runs on the main range; 3 policies + 19 sweep runs on each of 3 extra ranges", formula: "5 + 19 + 3 x (3 + 19) = 90",
      check: {expr: "runs_per_make_run()", fmt: "{:d}", expect: "90"}}
   - {id: F-28, slides: ["05", "10"], label: "make run time", shown: "≈ 20 s / ~20 s", type: direct, source: "README 'Running it'", key: "'(~20 s)'", formula: "-", note: "Stated in the README; results.json does not record a run time, and it depends on the machine.",
      check: {expr: "grep('README.md', r'~20 s')", fmt: bool}}
-  - {id: F-29, slides: ["05", "06", "08"], label: "Legacy year-2 value fill rate (the matched-service target)", shown: "98.46%", type: direct, source: "outputs/results.json", key: "matched_service.target_value_fill_rate_year_2", formula: "x 100",
+  - {id: F-29, slides: ["05", "06", "08", "09"], label: "Legacy year-2 value fill rate (the matched-service target)", shown: "98.46%", type: direct, source: "outputs/results.json", key: "matched_service.target_value_fill_rate_year_2", formula: "x 100",
      check: {expr: "J('outputs/results.json')['matched_service']['target_value_fill_rate_year_2'] * 100", fmt: "{:.2f}%", expect: "98.46%"}}
   - {id: F-30, slides: ["05"], label: "Every architecture box exists in the code", shown: "generate_data.py, data.load(), context(), simulate.py, buffers.py, classify.py, policies.py, config.py, Ddmrp.order(), metrics.kpis(), metrics.py, cli.py, charts.py, outputs/", type: direct, source: "src/ddmrp_buffers/, scripts/", key: "files + functions", formula: "-",
      check: {expr: "all(grep(f, p) for f, p in [('scripts/generate_data.py', r'generate'), ('src/ddmrp_buffers/data.py', r'def load'), ('src/ddmrp_buffers/simulate.py', r'def context'), ('src/ddmrp_buffers/simulate.py', r'def actual_lead_times'), ('src/ddmrp_buffers/simulate.py', r'def simulate'), ('src/ddmrp_buffers/policies.py', r'class Ddmrp'), ('src/ddmrp_buffers/policies.py', r'use_spikes'), ('src/ddmrp_buffers/policies.py', r'dormant = cls == classify.DORMANT'), ('src/ddmrp_buffers/metrics.py', r'def kpis'), ('src/ddmrp_buffers/metrics.py', r'def stock_at_matched_service'), ('src/ddmrp_buffers/cli.py', r'def sweep'), ('src/ddmrp_buffers/charts.py', r'def frontier_chart'), ('src/ddmrp_buffers/config.py', r'class DdmrpSettings')])", fmt: bool}}
@@ -222,17 +222,18 @@ figures:
      check: {expr: "'{:,.0f} → {:,.0f}'.format(J('outputs/results.json')['policies']['min-max (legacy)']['year_2']['purchase_orders_per_month'], J('outputs/results.json')['policies']['DDMRP']['year_2']['purchase_orders_per_month'])", fmt: "{}", expect: "195 → 1,004"}}
   - {id: F-48, slides: ["08", "10"], label: "Policies compared", shown: "5 policies", type: direct, source: "outputs/results.json", key: "len(policies)", formula: "-",
      check: {expr: "len(J('outputs/results.json')['policies'])", fmt: "{:d}", expect: "5"}}
-  # ---- slide 09
-  - {id: F-49, slides: ["09"], label: "DDMRP year 2 at default settings: fill rate and days", shown: "96.61% · 39.9 d", type: direct, source: "outputs/results.json", key: "policies.DDMRP.year_2", formula: "-",
-     check: {expr: "(lambda p: '{:.2f}% · {:.1f} d'.format(p['value_fill_rate'] * 100, p['dio_days']))(J('outputs/results.json')['policies']['DDMRP']['year_2'])", fmt: "{}", expect: "96.61% · 39.9 d"}}
-  - {id: F-50, slides: ["09"], label: "DDMRP without customer-order visibility, year 2", shown: "94.49% · 39.8 d", type: direct, source: "outputs/results.json", key: "policies['DDMRP, no order-spike visibility'].year_2", formula: "-",
-     check: {expr: "(lambda p: '{:.2f}% · {:.1f} d'.format(p['value_fill_rate'] * 100, p['dio_days']))(J('outputs/results.json')['policies']['DDMRP, no order-spike visibility']['year_2'])", fmt: "{}", expect: "94.49% · 39.8 d"}}
-  - {id: F-51, slides: ["09"], label: "Tuned reorder point (z = 1.88), year 2", shown: "94.51% · 40.1 d", type: direct, source: "outputs/results.json; config.py:59", key: "policies['reorder point (tuned)'].year_2", formula: "-",
-     check: {expr: "(lambda p: '{:.2f}% · {:.1f} d'.format(p['value_fill_rate'] * 100, p['dio_days']))(J('outputs/results.json')['policies']['reorder point (tuned)']['year_2']) if grep('src/ddmrp_buffers/config.py', r'z: float = 1.88') else 'z changed'", fmt: "{}", expect: "94.51% · 40.1 d"}}
-  - {id: F-52, slides: ["09"], label: "Share of simulated demand value arriving as bulk orders", shown: "13.6% of demand value", type: direct, source: "outputs/results.json", key: "dataset.bulk_share_of_simulated_demand_value = 0.13556", formula: "x 100",
-     check: {expr: "J('outputs/results.json')['dataset']['bulk_share_of_simulated_demand_value'] * 100", fmt: "{:.1f}%", expect: "13.6%"}}
-  - {id: F-53, slides: ["09"], label: "Share of the stock cut that comes from recalculating weekly (tuned reorder point) rather than DDMRP", shown: "about 70%", type: derived, source: "outputs/results.json", key: "legacy DIO, matched-service DIO of reorder point and DDMRP", formula: "(97.64 - 65.89) / (97.64 - 52.14) = 0.698",
-     check: {expr: "(lambda j: (j['policies']['min-max (legacy)']['year_2']['dio_days'] - j['matched_service']['dio_at_target']['reorder point (tuned)']) / (j['policies']['min-max (legacy)']['year_2']['dio_days'] - j['matched_service']['dio_at_target']['DDMRP']) * 100)(J('outputs/results.json'))", fmt: "{:.0f}%", expect: "70%"}}
+  # ---- slide 09 (lesson and fix)
+  - {id: F-49, slides: ["09"], label: "Year-2 lost sales at cost: tuned reorder point / DDMRP without booked orders (zones only) / DDMRP with booked orders", shown: "2.49 M / 2.50 M / 1.54 M", type: direct, source: "outputs/results.json", key: "policies['reorder point (tuned)' | 'DDMRP, no order-spike visibility' | 'DDMRP'].year_2.lost_sales_value", formula: "/ 1e6, 2 decimals",
+     check: {expr: "(lambda p: '{:.2f} M / {:.2f} M / {:.2f} M'.format(p['reorder point (tuned)']['year_2']['lost_sales_value'] / 1e6, p['DDMRP, no order-spike visibility']['year_2']['lost_sales_value'] / 1e6, p['DDMRP']['year_2']['lost_sales_value'] / 1e6))(J('outputs/results.json')['policies'])", fmt: "{}", expect: "2.49 M / 2.50 M / 1.54 M"},
+     note: "Bars share one scale on both panels: 100 px per million (2.6 M = 260 px)."}
+  - {id: F-50, slides: ["09"], label: "All three policies hold about 40 days of stock in year 2 (40.1 / 39.8 / 39.9)", shown: "about 40 days of stock / ~40 days of stock", type: derived, source: "outputs/results.json", key: "policies[*].year_2.dio_days", formula: "each within 40 ± 0.5 days",
+     check: {expr: "all(abs(J('outputs/results.json')['policies'][k]['year_2']['dio_days'] - 40) < 0.5 for k in ['reorder point (tuned)', 'DDMRP, no order-spike visibility', 'DDMRP'])", fmt: bool}}
+  - {id: F-51, slides: ["09"], label: "Lost-sales change from counting booked orders (DDMRP vs DDMRP zones only; vs the reorder point it is also -38%)", shown: "−38%", type: derived, source: "outputs/results.json", key: "F-49", formula: "1.5405 / 2.5026 - 1 = -38.4%; 1.5405 / 2.4906 - 1 = -38.1%",
+     check: {expr: "(lambda p: (p['DDMRP']['year_2']['lost_sales_value'] / p['DDMRP, no order-spike visibility']['year_2']['lost_sales_value'] - 1) * 100 if round((p['DDMRP']['year_2']['lost_sales_value'] / p['reorder point (tuned)']['year_2']['lost_sales_value'] - 1) * 100) == -38 else 0)(J('outputs/results.json')['policies'])", fmt: "{:+.0f}%", expect: "-38%"}}
+  - {id: F-52, slides: ["09"], label: "The fix in the code: a customer order already placed counts against net flow if it is at least half the red zone and due within the lead time; on by default; covered by a unit test", shown: "policies.py: an order of at least half the red zone, due within the lead time, cuts net flow at once. On by default.", type: direct, source: "src/ddmrp_buffers/policies.py:39-47, 119, 160-165; config.py:39; tests/test_simulation.py:79-97", key: "Context.open_spikes, Ddmrp.use_spikes, spike_threshold_share = 0.5", formula: "-",
+     check: {expr: "grep('src/ddmrp_buffers/policies.py', r'def open_spikes') and grep('src/ddmrp_buffers/policies.py', r'self.bulk_due <= t \\+ horizon') and grep('src/ddmrp_buffers/policies.py', r'use_spikes: bool = True') and grep('src/ddmrp_buffers/policies.py', r'qualified = ctx.open_spikes\\(t, ctx.lead_time, thr\\)') and grep('src/ddmrp_buffers/config.py', r'spike_threshold_share: float = 0.5') and grep('tests/test_simulation.py', r'def test_open_order_counts_against_buffer_only_while_open_and_large')", fmt: bool}}
+  - {id: F-53, slides: ["09"], label: "Payoff at matched service: days of stock at today's 98.46% fill, DDMRP vs tuned reorder point", shown: "52.1 vs 65.9 days", type: direct, source: "outputs/results.json", key: "matched_service.dio_at_target", formula: "-",
+     check: {expr: "(lambda m: '{:.1f} vs {:.1f}'.format(m['DDMRP'], m['reorder point (tuned)']))(J('outputs/results.json')['matched_service']['dio_at_target'])", fmt: "{}", expect: "52.1 vs 65.9"}}
   # ---- slide 10
   - {id: F-54, slides: ["10"], label: "Licence", shown: "MIT", type: direct, source: "LICENSE line 1", key: "-", formula: "-",
      check: {expr: "T('LICENSE').startswith('MIT License')", fmt: bool}}
@@ -250,54 +251,59 @@ slides:
     text:
       - "01 · THE INDUSTRY"
       - "Every week, purchasing decides how much of every SKU to buy."
+      - "A SKU is one product in one pack size. Who buys stock this way, and the four problems they run into."
       - "WHO LIVES WITH THIS · Lubricant & chemical distributors · Industrial spare parts · Auto-parts wholesale"
-      - "01 Min-max levels set once a year — Stale by the time demand shifts"
+      - "01 Reorder levels (min-max) set once a year — Stale by the time demand shifts"
       - "02 Imports take months and arrive late — A held shipment becomes an empty shelf"
       - "03 One big customer order empties the shelf — The sale goes to a competitor"
       - "04 Months of stock on items that barely sell — Cash the finance team cannot use"
       - "THIS PROJECT holds less stock without losing service · history → buffers → orders → fill rate"
     assumptions: [A-14]
     illustrative: ["The whole slide is context; no repo figures."]
-    change: "Edit the chips (#ctx-c1..3) and cards (#ctx-k1..4) in compositions/s01-context.html."
+    change: "Edit the subtitle (#ctx-sub), chips (#ctx-c1..3) and cards (#ctx-k1..4) in compositions/s01-context.html."
   - id: "02"
     title: "This project"
     image: slides/slide-02.jpg
-    time: "6.8-11.6 s"
+    time: "6.8-12.0 s"
     composition: "compositions/s02-hook.html"
     text:
       - "02 · THIS PROJECT"
+      - "The project in one line: a big, overstocked range where most products sell on only a few days."
       - "800 SKUs, 21.5M in stock. 172 days of cover. Cut it without losing customers."
-      - "26% imports, 45–90 d lead · 4,702 bulk orders, 3–21 d notice · 60% of SKU-days sell nothing"
+      - "26% imported, 45–90 d to arrive · 4,702 big orders, booked 3–21 d ahead · 60% of SKU-days sell nothing"
+      - "Days of cover = how long today's stock would last at normal sales. Fewer days = less cash tied up."
     assumptions: [A-01, A-02, A-04, A-10]
     illustrative: ["Rings in the background are decoration."]
-    change: "Headline spans #hook-l1..l3 and chips #hook-f1..f3 in compositions/s02-hook.html; numbers from outputs/results.json (dataset, opening_*)."
+    change: "Headline spans #hook-l1..l3, chips #hook-f1..f3 and the definition line #hook-def in compositions/s02-hook.html; numbers from outputs/results.json (dataset, opening_*)."
   - id: "03"
     title: "How it works (white chapter, slide A)"
     image: slides/slide-03.jpg
-    time: "11.3-19.3 s"
+    time: "11.7-19.7 s"
     composition: "compositions/explainer.html (CONFIG.blocks, CONFIG.groups, CONFIG.loop)"
     text:
       - "03 · HOW IT WORKS"
       - "From sales history to orders"
-      - "SALES HISTORY 800 SKUs, every day → [EVERY 7 DAYS: DEMAND RATE 84-day average → BUFFERS red, yellow and green zones] → [EVERY DAY: NET FLOW stock + incoming − big orders → REORDER fill back up to green] → ORDERS OUT ✓ 47% less stock ✓ same fill rate ✓ case + MOQ"
+      - "Read left to right. Fill rate = share of demand shipped on the day it was due; higher is better."
+      - "SALES HISTORY 800 SKUs, every day → [EVERY 7 DAYS: DEMAND RATE average daily sales, last 84 days → BUFFERS red, yellow and green zones] → [EVERY DAY: NET FLOW stock + incoming − big orders → REORDER fill back up to green] → ORDERS OUT ✓ 47% less stock ✓ same fill rate ✓ full cases"
       - "all 800 SKUs, daily (loop over REORDER)"
     assumptions: [A-05, A-08]
-    illustrative: ["Icons and colours are a visual language, not data.", "'same fill rate' and '47% less stock' hold at matched service (A-08), not at default settings."]
-    change: "Edit CONFIG in compositions/explainer.html; badge truth from outputs/results.json matched_service (F-14)."
+    illustrative: ["Icons and colours are a visual language, not data.", "'same fill rate' and '47% less stock' hold at matched service (A-08), not at default settings.", "'full cases' shortens the rounding rule: order quantities are rounded up to the case size and the minimum order quantity."]
+    change: "Edit CONFIG and the #ex-a-sub line in compositions/explainer.html; badge truth from outputs/results.json matched_service (F-14)."
   - id: "04"
     title: "The key idea (white chapter, slide B)"
     image: slides/slide-04.jpg
-    time: "19.3-26.3 s"
+    time: "19.7-26.7 s"
     composition: "compositions/explainer.html (slide B markup + its timeline block)"
     text:
       - "04 · THE KEY IDEA"
       - "Seeing big orders early"
+      - "Net flow = the stock you can really count on. At yellow or below, reorder up to the top of green."
       - "Fleet customers book big orders early — 3 to 21 days before they ship"
       - "Net flow counts them right away — on hand + on order − orders already placed"
       - "So the reorder covers them in time — a reorder point sees them only when they ship"
       - "ONE SKU · THE HAND-WORKED TEST: net flow 170 → 140; red 105 · yellow 205 · green 275; on hand 120 + on order 50; − customer order 30"
       - "Order 144 = 275 − 140, in cases of 12. Without the customer order: 108."
-      - "Switch it off and DDMRP falls to the reorder point's fill rate: 94.49% vs 94.51% (year 2)."
+      - "Without this step, DDMRP only matches a classic reorder point: fill rate 94.49% vs 94.51% (year 2)."
     assumptions: [A-02, A-05]
     illustrative: ["The buffer bar is drawn to scale for the hand-worked test SKU (tests/test_buffers.py), not a SKU from the range."]
     change: "Slide B markup and the 'hand-worked buffer' block in the explainer timeline; the 108 is derived (F-17)."
@@ -305,44 +311,48 @@ slides:
     title: "Architecture"
     image: slides/slide-05a.jpg
     image2: slides/slide-05b.jpg
-    time: "26.0-40.8 s"
+    time: "26.4-41.2 s"
     composition: "compositions/s03-architecture.html (node markup + the wires list)"
     text:
       - "05 · ARCHITECTURE — Weekly buffers, a daily net-flow decision, one scorer."
-      - "1 SOURCES: Generator (generate_data.py, seed 20240101) → skus.csv 800 · LT · MOQ · demand.csv.gz 1,096 d × 800 · bulk_orders.csv 4,702 · 3–21 d · 2023: 4.7% missing"
-      - "2 LOAD: Load range (data.load(), → Dataset) · Sim context (context(), LT · MOQ · cost) · Lead times (simulate.py, +14–35 d holds)"
-      - "3 POLICY LOGIC: Buffer sizing (buffers.py, ADU 84 d · LTF · VF, red · yellow · green) · Slow movers (classify.py, 4 classes · 180 d) · Policies (policies.py, legacy · ROP · DDMRP) · Set by hand (config.py, factors, windows)"
-      - "4 DECIDE + SIMULATE: Net-flow decision (Ddmrp.order(): on hand + on order − customer orders placed; ≤ TOY? yes: up to TOG; round to MOQ · case) · Daily loop (simulate.py: receive → ship → order; unfilled demand = lost; day 0→731 / 731, 800 SKUs) · alternate rules (spikes off (ablation); dormant: buy to order)"
-      - "5 EVALUATE: KPIs (metrics.kpis(): DIO · value fill rate, stockouts · POs) · Matched service (metrics.py: DIO @ legacy 98.46%) · outputs/ (results.json · csv, charts.py → 3 PNG) · Sweep + seeds (cli.py: 11 z · 8 red sizes, + 3 fresh ranges) · 90 runs in ≈ 20 s"
-      - "Edge labels: make data · open bulk orders, daily · 84-d window · weekly · realised lead time · zones · order qty · stock · ×90"
+      - "Each box is a file or function in the repo. Read left to right: data, weekly buffers, daily orders, scoring."
+      - "1 SOURCES: Generator (generate_data.py, seed 20240101) → skus.csv 800 SKUs · demand.csv.gz 1,096 days × 800 · bulk_orders.csv 4,702 big orders · 2023: 4.7% missing"
+      - "2 LOAD: Load range (data.load(), → Dataset) · Sim context (context(), lead time · cost) · Lead times (simulate.py, +14–35 d at port)"
+      - "3 POLICY LOGIC: Buffer sizing (buffers.py, avg daily sales, 84 d; red · yellow · green) · Slow movers (classify.py, 4 classes · last 180 d) · Policies (policies.py, 3 rules, incl. DDMRP) · Set by hand (config.py, factors, windows)"
+      - "4 DECIDE + SIMULATE: Net-flow decision (Ddmrp.order(): on hand + on order − customer orders placed; ≤ yellow? yes: refill; up to green, in full cases) · Daily loop (simulate.py: receive → ship → order; unfilled demand = lost; day 0→731 / 731, 800 SKUs) · alternate rules (test: big orders ignored; unsold items: buy on order)"
+      - "5 EVALUATE: KPIs (metrics.kpis(): stock days · fill rate, stockouts · orders) · Matched service (metrics.py: days at today's 98.46%) · outputs/ (results.json · csv, charts.py → 3 charts) · Sweep + seeds (cli.py: 11 + 8 safety settings, + 3 new datasets) · 90 runs in ≈ 20 s"
+      - "Edge labels: make data · open big orders, daily · 84-d window · weekly · realised lead time · zones · order qty · stock · ×90"
       - "Legend: per-day call · weekly / batch · feedback · data store · set by hand · alternate path · decision"
-      - "Second phase (38.0-40.8 s): critical path: bulk order → net flow → fill rate (bulk_orders.csv → data.load() → context() → Ddmrp.order() → daily loop → KPIs → matched service → outputs/)"
+      - "Second phase (38.4-41.2 s): critical path: big order → net flow → fill rate (bulk_orders.csv → data.load() → context() → Ddmrp.order() → daily loop → KPIs → matched service → outputs/); other boxes stay at 75% opacity"
     assumptions: [A-01, A-02, A-04, A-05, A-07, A-08]
-    illustrative: ["Packets and the day counter show execution order, not real-time speed.", "'alternate rules' groups two real code paths: the no-spike ablation arm (use_spikes=False) and the slow-mover rule (dormant SKUs bought only against an order in hand).", "The critical-path highlight is emphasis only."]
+    illustrative: ["Packets and the day counter show execution order, not real-time speed.", "'alternate rules' groups two real code paths: the no-spike ablation arm (use_spikes=False, 'big orders ignored') and the slow-mover rule (dormant SKUs bought only against an order in hand).", "'3 rules' = the three policy classes in policies.py (LegacyMinMax, ReorderPoint, Ddmrp); the five compared policies are these plus two DDMRP switches.", "The critical-path highlight is emphasis only."]
     change: "Boxes are absolutely positioned divs in compositions/s03-architecture.html; wires are the `wires` point lists in its script (keep them orthogonal and matching the box edges); `crit: true` and `critNodes` set the highlighted path."
   - id: "06"
     title: "The system running"
     image: slides/slide-06a.jpg
     image2: slides/slide-06b.jpg
-    time: "40.4-55.0 s"
+    time: "40.8-55.4 s"
     composition: "compositions/s04-routes.html"
     text:
       - "06 · THE SYSTEM RUNNING — Two years, day by day: every SKU holds its own buffer."
+      - "Two products from the run. Bands = buffer zones; white line = stock on hand. Staying above red is good."
       - "LOCAL BLEND · 5-DAY LEAD — Opening overstock burns off, then on-hand cycles through yellow and green"
       - "IMPORT · 79-DAY LEAD — Big zones for a long lead time, late shipments still push it to zero"
       - "Second phase: Same fill rate as today, far less stock."
+      - "Each line is one policy at different safety settings. At today's 98.46% fill rate, fewer days of stock is better."
       - "AT TODAY'S FILL RATE · 98.46% — days of stock each policy needs (year 2): Min-max (legacy) 97.6 · Reorder point (tuned) 65.9 · DDMRP 52.1 — 52.1 days −47%"
-      - "each policy swept over its one safety knob, then read at the legacy fill rate"
+      - "Reorder point run at 11 safety settings, DDMRP at 8; each is read where it gives today's fill rate (the rings)."
     assumptions: [A-04, A-07, A-08, A-09]
     illustrative: ["Panels are outputs/buffer_chart.png and outputs/frontier.png converted to dark by tools/darkmap.py; nothing is redrawn.", "The dashed line and rings on the frontier are annotations (F-32).", "Side captions describe what the two plotted SKUs show (README 'How it works')."]
     change: "Re-run tools/darkmap.py after make run; bar widths in #routes-f1..3 are 520 x DIO / 97.6; the counter tweens 97.6 → 52.1."
   - id: "07"
     title: "End-user value (white)"
     image: slides/slide-07.jpg
-    time: "54.7-67.7 s"
+    time: "55.1-68.1 s"
     composition: "compositions/value.html (SHEET injected by tools/inject_sheet.py)"
     text:
       - "07 · END-USER VALUE — What the planner gets"
+      - "Today's buy list, most urgent first. BOOKED = customer orders already placed; NET FLOW = stock + open PO − booked."
       - "PURCHASE ORDER PROPOSALS · MON 2025-09-08 · DDMRP"
       - "SKU · PRODUCT · FROM · STOCK · OPEN PO · BOOKED · NET FLOW · BUY · DUE"
       - "LUB-0022 HD engine oil 1,000 L blend 2 0 −2 0 3 Sep 13"
@@ -361,35 +371,39 @@ slides:
   - id: "08"
     title: "Results"
     image: slides/slide-08.jpg
-    time: "67.4-76.2 s"
+    time: "67.8-76.6 s"
     composition: "compositions/s05-results.html"
     text:
-      - "08 · RESULTS · YEAR 2, MATCHED SERVICE — Less stock at the same service, paid for in purchase orders."
+      - "08 · RESULTS · YEAR 2, SAME SERVICE AS TODAY — Less stock at the same service, paid for in purchase orders."
+      - "Every policy is compared at today's 98.46% fill rate. Fewer days of stock is better; more orders means more work."
       - "STOCK −47% days of stock at today's fill rate · 97.6 → 52.1 days"
       - "VS TUNED BASELINE −13.7 d beyond a tuned reorder point · 65.9 → 52.1 days"
-      - "ROBUSTNESS 59.6 d worst DDMRP case, 4 ranges · legacy: 97.6–108.2 days"
+      - "ROBUSTNESS 59.6 d worst DDMRP result, 4 datasets · legacy: 97.6–108.2 days"
       - "THE COST 5.1× purchase orders a month · 195 → 1,004 a month"
-      - "800 SKUs · 731 simulated days · 5 policies · read at legacy fill 98.46%"
+      - "800 SKUs · 731 simulated days · 5 policies compared · all read at today's 98.46% fill rate"
     assumptions: [A-07, A-08, A-09, A-12]
     illustrative: ["Mini bars are proportional to the shown ratios."]
     change: "Edit the `stats` array and card text in compositions/s05-results.html."
   - id: "09"
-    title: "What didn't win"
+    title: "Lesson and fix"
     image: slides/slide-09.jpg
-    time: "75.8-82.4 s"
+    time: "76.2-85.2 s"
     composition: "compositions/s06-twist.html"
     text:
-      - "09 · WHAT DIDN'T WIN — DDMRP's zones alone don't beat a tuned reorder point."
-      - "Year 2, default settings, all holding about 40 days of stock: value fill rate"
-      - "DDMRP (with customer orders · 39.9 d) 96.61% · DDMRP, spikes off (zones only · 39.8 d) 94.49% · Reorder point (tuned) (z = 1.88 · 40.1 d) 94.51% · bars start at 90%"
-      - "Why: the edge is counting customer orders already placed (13.6% of demand value here), not the zones. And about 70% of the stock cut comes from recalculating weekly at all."
-    assumptions: [A-02, A-05, A-07]
-    illustrative: ["Bar width = (fill - 90%) x 100 px per point."]
-    change: "Rows #twist-r1..r3 and #twist-verdict in compositions/s06-twist.html."
+      - "09 · LESSON AND FIX — Zones alone tie a reorder point. So I count booked orders."
+      - "Year 2, each policy holding about 40 days of stock. Lost sales = demand turned away, at cost; lower is better."
+      - "THE LESSON — Buffer zones on their own add nothing · Lost sales, year 2, both holding ~40 days of stock: Reorder point (tuned, weekly) 2.49 M · DDMRP zones (orders ignored) 2.50 M [TIE]"
+      - "Same stock and the same fill rate, 94.49% vs 94.51%: the zones size stock no better than the classic rule."
+      - "THE FIX, IN THE REPO — Count booked orders as soon as placed · Lost sales, same year, same ~40 days of stock: DDMRP (+ booked orders) 1.54 M [PICKED] · DDMRP zones (orders ignored) 2.50 M · Reorder point (tuned, weekly) 2.49 M"
+      - "policies.py: an order of at least half the red zone, due within the lead time, cuts net flow at once. On by default."
+      - "PAYOFF — Lost sales −38% at the same stock · at today's 98.46% fill: 52.1 vs 65.9 days · DDMRP vs reorder point"
+    assumptions: [A-02, A-03, A-05, A-07, A-08, A-09]
+    illustrative: ["Bar width = 100 px per million of lost sales, one scale on both panels; neutral grey for every option, mint only for the picked fix.", "'TIE' marks the trap: zone sizing alone gives the reorder point's result.", "'PICKED' = the repo's default DDMRP policy (use_spikes=True); it is the policy behind every headline number."]
+    change: "Rows #twist-l1..l2 / #twist-r1..r3, the notes and #twist-payoff in compositions/s06-twist.html; bar widths are lost sales in millions x 100 px."
   - id: "10"
     title: "End card"
     image: slides/slide-10.jpg
-    time: "82.0-86.4 s"
+    time: "84.8-89.2 s"
     composition: "compositions/s07-end.html"
     text:
       - "10 · OPEN SOURCE · MIT · RUNS ON A LAPTOP"
@@ -397,6 +411,7 @@ slides:
       - "github.com/kavya2693/ddmrp-buffers"
       - "Python 3.11 · NumPy · pandas · matplotlib"
       - "$ make run   # 800 SKUs, 5 policies, ~20 s"
+      - "One command rebuilds every table the numbers in this video come from."
     assumptions: [A-13]
     illustrative: ["Faded chart in the background is outputs/frontier.png."]
     change: "Text in compositions/s07-end.html."
@@ -409,13 +424,15 @@ caveats:
   - "Slide 07 shows one day (2025-09-08) re-run by tools/export_po_sheet.py with the repo's own DDMRP policy, data and seed; the day was chosen by the video author. DUE dates use the nominal lead time."
   - "Purchase orders are counted, not costed (A-12): the 5.1x workload is real in the simulation, its cost is not modelled."
   - "The architecture slide groups two code paths as 'alternate rules': the no-spike ablation arm and the slow-mover rule (strangers keep the red zone only, dormant SKUs are bought only against an order in hand)."
+  - "Slide 09 shows the lesson on lost sales at default settings (all three policies hold 39.8-40.1 days). Two findings it no longer shows are still in the README ('The result', findings 1 and 2): about 70% of the stock cut at matched service comes from recalculating weekly (a tuned reorder point already gets 97.6 to 65.9 days), and bulk orders are 13.6% of simulated demand value, which is why counting them pays off here."
+  - "The fix on slide 09 (counting booked orders) is DDMRP's standard net flow equation, implemented in policies.py and switched off only in the ablation arm; its size depends on how many orders are booked ahead in the generated data (A-02, README 'Known limitations')."
   - "Slide 01 statements are general industry knowledge (A-14)."
   - "make run time (~20 s) is the README's statement for the author's laptop; it is not recorded in results.json."
 
 stills:
   master: renders/ddmrp-buffers-master.mp4   # relative to demo_dir
   width: 1600
-  times: {"01": 6.4, "02": 11.1, "03": 18.9, "04": 25.6, "05a": 37.0, "05b": 40.1, "06a": 46.0, "06b": 54.2, "07": 66.6, "08": 75.4, "09": 81.9, "10": 86.2}
+  times: {"01": 6.2, "02": 11.0, "03": 19.0, "04": 25.0, "05a": 37.4, "05b": 40.2, "06a": 46.4, "06b": 54.2, "07": 66.6, "08": 75.4, "09": 84.1, "10": 89.0}
 
 # Extra check helpers (Python), available to check expressions.
 helpers: |

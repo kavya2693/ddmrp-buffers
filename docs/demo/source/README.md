@@ -15,7 +15,7 @@ Everything needed to rebuild the silent walkthrough (`docs/demo/demo.mp4`) and t
 | `compositions/s03-architecture.html` | Slide 05, the layered architecture diagram (boxes + the `wires` list) |
 | `compositions/s04-routes.html` | Slide 06, the buffer chart and the stock-versus-service frontier read at the legacy fill rate |
 | `compositions/value.html` | Slide 07, the purchase-order proposals and planner scene (data injected by `tools/inject_sheet.py`) |
-| `compositions/s05-results.html`, `s06-twist.html`, `s07-end.html` | Slides 08-10, results, what didn't win, end card |
+| `compositions/s05-results.html`, `s06-twist.html`, `s07-end.html` | Slides 08-10, results, lesson and fix, end card |
 | `assets/buffer-*.png`, `assets/frontier.png` | Dark versions of `outputs/buffer_chart.png` and `outputs/frontier.png`, made by `tools/darkmap.py` |
 | `assets/po_sheet.json` | Purchase-order proposals for Monday 2025-09-08, exported by `tools/export_po_sheet.py` |
 | `audit/facts.yaml` | Every figure (F-xx), assumption (A-xx), slide text and check expression used by the report |
@@ -51,7 +51,7 @@ python3 docs/demo/source/tools/inject_sheet.py docs/demo/source/assets/po_sheet.
   --rows LUB-0022,LUB-0304,LUB-0540,LUB-0079,LUB-0788,LUB-0035 \
   --animate LUB-0022,LUB-0304,LUB-0079,LUB-0035
 
-# 3. render (86.4 s, 1920x1080, 30 fps, silent) and compress
+# 3. render (89.2 s, 1920x1080, 30 fps, silent) and compress
 cd docs/demo/source
 npx --yes hyperframes@0.8.156 check
 npx --yes hyperframes@0.8.156 render -f 30 -q looks -o renders/ddmrp-buffers-master.mp4
@@ -59,10 +59,10 @@ cd -
 ffmpeg -y -i docs/demo/source/renders/ddmrp-buffers-master.mp4 -c:v libx264 -preset slow -crf 25 \
   -pix_fmt yuv420p -movflags +faststart -an docs/demo/demo.mp4
 
-# GIFs: the end-user value slide (12 s) and the architecture data flow + critical path (7.8 s loop)
+# GIFs: the end-user value slide (10.9 s) and the architecture data flow + critical path (7.8 s loop)
 GIF='fps=12,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle'
-ffmpeg -y -ss 55.6 -t 12 -i docs/demo/source/renders/ddmrp-buffers-master.mp4 -vf "$GIF" -loop 0 docs/demo/demo.gif
-ffmpeg -y -ss 32.4 -t 7.8 -i docs/demo/source/renders/ddmrp-buffers-master.mp4 -vf "$GIF" -loop 0 docs/demo/architecture.gif
+ffmpeg -y -ss 56.1 -t 10.9 -i docs/demo/source/renders/ddmrp-buffers-master.mp4 -vf "$GIF" -loop 0 docs/demo/demo.gif
+ffmpeg -y -ss 32.8 -t 7.8 -i docs/demo/source/renders/ddmrp-buffers-master.mp4 -vf "$GIF" -loop 0 docs/demo/architecture.gif
 
 # 4. audit report: slide stills, automated checks, AUDIT_REPORT.md/.docx/.pdf
 python3 docs/demo/source/tools/build_audit_report.py docs/demo/source/audit/facts.yaml

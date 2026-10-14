@@ -12,7 +12,7 @@
           background: var(--panel); padding: 44px 34px 36px; display: flex; flex-direction: column; overflow: hidden;
         }
         #results-root .card .bar { position: absolute; left: 0; top: 0; width: 100%; height: 6px; }
-        #results-root .card .layer { font-family: var(--mono); font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; }
+        #results-root .card .layer { font-family: var(--mono); font-size: 22px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
         #results-root .card .big {
           margin-top: 18px; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 96px;
           font-weight: 700; letter-spacing: -0.05em; line-height: 1; white-space: nowrap;
@@ -34,12 +34,13 @@
         #results-root .rsk .big, #results-root .rsk .layer { color: var(--c-risk); }
         #results-root .card .lab { min-height: 78px; }
         #results-root .card .big small { font-size: 44px; letter-spacing: 0; margin-left: 6px; }
-        #results-root .footnote { position: absolute; left: 120px; top: 840px; font-family: var(--mono); font-size: 24px; color: var(--ink-mute); }
+        #results-root .footnote { position: absolute; left: 120px; top: 840px; font-size: 26px; font-weight: 500; color: var(--ink-soft); }
       </style>
       <div id="results-root" data-composition-id="results" data-width="1920" data-height="1080">
         <div class="scene" id="results-in">
-          <div class="eyebrow" data-layout-allow-overlap id="results-eyebrow">08 · Results · year 2, matched service</div>
+          <div class="eyebrow" data-layout-allow-overlap id="results-eyebrow">08 · Results · year 2, same service as today</div>
           <div class="scene-title" data-layout-allow-overlap id="results-title">Less stock at the same service, paid for in purchase orders.</div>
+          <div class="scene-sub" id="results-sub">Every policy is compared at today's 98.46% fill rate. Fewer days of stock is better; more orders means more work.</div>
           <div class="cards">
             <div class="card opt" id="results-c1"><div class="bar"></div><div class="layer">stock</div>
               <div class="big"><span id="results-v1">0</span><small>%</small></div><div class="lab">days of stock at today's fill rate</div>
@@ -48,13 +49,13 @@
               <div class="big"><span id="results-v2">0.0</span><small>d</small></div><div class="lab">beyond a tuned reorder point</div>
               <div class="mini"><div class="mini-fill" id="results-m2"></div></div><div class="foot">65.9 → 52.1 days</div></div>
             <div class="card eva" id="results-c3"><div class="bar"></div><div class="layer">robustness</div>
-              <div class="big"><span id="results-v3">108.2</span><small>d</small></div><div class="lab">worst DDMRP case, 4 ranges</div>
+              <div class="big"><span id="results-v3">108.2</span><small>d</small></div><div class="lab">worst DDMRP result, 4 datasets</div>
               <div class="mini"><div class="mini-fill" id="results-m3"></div></div><div class="foot">legacy: 97.6–108.2 days</div></div>
             <div class="card rsk" id="results-c4"><div class="bar"></div><div class="layer">the cost</div>
               <div class="big"><span id="results-v4">1.0</span><small>×</small></div><div class="lab">purchase orders a month</div>
               <div class="mini"><div class="mini-fill" id="results-m4"></div></div><div class="foot">195 → 1,004 a month</div></div>
           </div>
-          <div class="footnote" id="results-foot">800 SKUs · 731 simulated days · 5 policies · read at legacy fill 98.46%</div>
+          <div class="footnote" id="results-foot">800 SKUs · 731 simulated days · 5 policies compared · all read at today's 98.46% fill rate</div>
         </div>
       </div>
       <script>
@@ -64,6 +65,7 @@
           tl.fromTo("#results-in", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
           tl.fromTo("#results-eyebrow", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.1);
           tl.fromTo("#results-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+          tl.fromTo("#results-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5);
           const stats = [
             { v: "results-v1", m: "#results-m1", from: 0, to: -47, d: 0, r0: 1, r: 52.1 / 97.6 },
             { v: "results-v2", m: "#results-m2", from: 0, to: -13.7, d: 1, r0: 1, r: 52.1 / 65.9 },
@@ -79,7 +81,7 @@
             tl.fromTo(s.m, { scaleX: s.r0 }, { scaleX: s.r, duration: 1.6, ease: "power3.out" }, at + 0.3);
           });
           tl.fromTo("#results-foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 2.8);
-          tl.to("#results-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          tl.to("#results-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.8); // dip: fully out before the next scene starts
           window.__timelines["results"] = tl;
         })();
       </script>
