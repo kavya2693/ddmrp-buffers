@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        /* 06 · THE SYSTEM RUNNING: phase A = DDMRP buffers day by day (outputs/buffer_chart.png),
+           phase B = the stock-versus-service frontier (outputs/frontier.png) read at the legacy fill rate. */
+        #routes-root { position: absolute; inset: 0; }
+        #routes-root .title2 { opacity: 0; }
+        /* phase A */
+        #routes-root .panel {
+          position: absolute; left: 120px; width: 1240px; height: 370px; border-radius: 14px;
+          border: 2px solid var(--line); overflow: hidden; background: #0b1722;
+        }
+        #routes-root .panel img { display: block; width: 1240px; height: 370px; }
+        #routes-root .scan { position: absolute; top: 0; left: 0; width: 1240px; height: 370px; background: #0b1722; transform-origin: right center; }
+        #routes-root .side { position: absolute; left: 1410px; width: 390px; }
+        #routes-root .side .k { font-family: var(--mono); font-size: 22px; letter-spacing: 0.12em; color: var(--ink-mute); }
+        #routes-root .side .v { margin-top: 10px; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--ink); }
+        #routes-root .side .v small { display: block; margin-top: 8px; font-size: 24px; font-weight: 400; color: var(--ink-soft); }
+        #routes-root .keys { position: absolute; left: 1410px; top: 870px; display: flex; flex-wrap: wrap; gap: 10px 18px; width: 400px;
+          font-family: var(--mono); font-size: 20px; color: var(--ink-soft); }
+        #routes-root .keys span { display: flex; align-items: center; gap: 8px; }
+        #routes-root .keys i { display: block; width: 18px; height: 14px; border-radius: 3px; }
+        /* phase B */
+        #routes-root .phase-b { position: absolute; inset: 0; }
+        #routes-root .chart { position: absolute; left: 120px; top: 236px; width: 1000px; height: 572px; border-radius: 14px; border: 2px solid var(--line); overflow: hidden; background: #0b1722; }
+        #routes-root .chart img { display: block; width: 1000px; height: 572px; }
+        #routes-root svg.ov { position: absolute; left: 120px; top: 236px; width: 1000px; height: 572px; overflow: visible; }
+        #routes-root .card {
+          position: absolute; left: 1190px; top: 236px; width: 610px; height: 572px; border-radius: 16px;
+          border: 2px solid rgba(63, 216, 168, 0.6); background: rgba(12, 22, 32, 0.97); padding: 40px 44px;
+        }
+        #routes-root .card .lab { font-family: var(--mono); font-size: 24px; letter-spacing: 0.1em; color: var(--c-opt); }
+        #routes-root .card .sub { margin-top: 8px; font-size: 24px; color: var(--ink-soft); }
+        #routes-root .brow { margin-top: 34px; }
+        #routes-root .brow .who { display: flex; justify-content: space-between; font-size: 26px; font-weight: 700; color: var(--ink); }
+        #routes-root .brow .who b { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+        #routes-root .btrack { position: relative; margin-top: 10px; width: 520px; height: 24px; border-radius: 12px; background: rgba(178, 191, 204, 0.1); }
+        #routes-root .bfill { position: absolute; left: 0; top: 0; height: 24px; border-radius: 12px; transform-origin: left center; }
+        #routes-root .big { margin-top: 34px; display: flex; align-items: baseline; gap: 18px; }
+        #routes-root .big .n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 84px; font-weight: 700; letter-spacing: -0.04em; color: var(--ink); }
+        #routes-root .big .u { font-family: var(--mono); font-size: 30px; color: var(--ink-soft); }
+        #routes-root .badge { font-family: var(--mono); font-size: 44px; font-weight: 700; color: #ffffff; background: var(--c-opt-deep); padding: 4px 18px; border-radius: 12px; }
+        #routes-root .foot { position: absolute; left: 120px; top: 840px; font-family: var(--mono); font-size: 24px; color: var(--ink-mute); }
+      </style>
+
+      <div id="routes-root" data-composition-id="routes" data-width="1920" data-height="1080">
+        <div class="scene" id="routes-in">
+          <div class="eyebrow" data-layout-allow-overlap id="routes-eyebrow">06 · The system running</div>
+          <div class="scene-title" data-layout-allow-overlap id="routes-title">Two years, day by day: every SKU holds its own buffer.</div>
+          <div class="scene-title title2" data-layout-allow-overlap id="routes-title2">Same fill rate as today, far less stock.</div>
+
+          <div class="phase-a" id="routes-a">
+            <div class="panel" id="routes-p1" style="top: 222px">
+              <img src="assets/buffer-local.png" alt="DDMRP buffer, local-blend runner" id="routes-img1" data-layout-allow-overflow />
+              <div class="scan" id="routes-scan1"></div>
+            </div>
+            <div class="panel" id="routes-p2" style="top: 610px">
+              <img src="assets/buffer-import.png" alt="DDMRP buffer, imported runner" id="routes-img2" data-layout-allow-overflow />
+              <div class="scan" id="routes-scan2"></div>
+            </div>
+            <div class="side" id="routes-s1" style="top: 236px">
+              <div class="k">LOCAL BLEND · 5-DAY LEAD</div>
+              <div class="v">Opening overstock burns off<small>then on-hand cycles through yellow and green</small></div>
+            </div>
+            <div class="side" id="routes-s2" style="top: 624px">
+              <div class="k">IMPORT · 79-DAY LEAD</div>
+              <div class="v">Big zones for a long lead time<small>late shipments still push it to zero</small></div>
+            </div>
+            <div class="keys" id="routes-keys" data-layout-allow-overflow>
+              <span><i style="background: #6b2a33"></i>red</span>
+              <span><i style="background: #7d6a2b"></i>yellow</span>
+              <span><i style="background: #2f6747"></i>green</span>
+              <span><i style="background: #e5e7eb; height: 4px"></i>on hand</span>
+              <span><i style="background: #3f7fe0; height: 4px"></i>net flow</span>
+            </div>
+          </div>
+
+          <div class="phase-b" id="routes-b">
+            <div class="chart" id="routes-chart"><img src="assets/frontier.png" alt="stock versus service frontier" id="routes-fimg" /></div>
+            <svg class="ov" id="routes-ov" viewBox="0 0 1000 572"></svg>
+            <div class="card" id="routes-card">
+              <div class="lab">AT TODAY'S FILL RATE · 98.46%</div>
+              <div class="sub">days of stock each policy needs (year 2)</div>
+              <div class="brow" id="routes-r1"><div class="who"><span>Min-max (legacy)</span><b>97.6</b></div>
+                <div class="btrack"><div class="bfill" id="routes-f1" style="width: 520px; background: var(--ink-mute)"></div></div></div>
+              <div class="brow" id="routes-r2"><div class="who"><span>Reorder point (tuned)</span><b>65.9</b></div>
+                <div class="btrack"><div class="bfill" id="routes-f2" style="width: 351px; background: var(--c-data)"></div></div></div>
+              <div class="brow" id="routes-r3"><div class="who"><span style="color: var(--c-opt)">DDMRP</span><b style="color: var(--c-opt)">52.1</b></div>
+                <div class="btrack"><div class="bfill" id="routes-f3" style="width: 278px; background: var(--c-opt)"></div></div></div>
+              <div class="big"><span class="n" id="routes-num">97.6</span><span class="u">days</span><span class="badge" id="routes-badge">−47%</span></div>
+            </div>
+            <div class="foot" id="routes-foot">each policy swept over its one safety knob, then read at the legacy fill rate</div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const D = 14.6;
+          const NS = "http://www.w3.org/2000/svg";
+          tl.fromTo("#routes-in", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+          tl.fromTo("#routes-eyebrow", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+          tl.fromTo("#routes-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+
+          // ---- phase A: the two buffer panels draw left to right (a cover wipes off; no data redrawn)
+          tl.fromTo("#routes-p1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.5);
+          tl.fromTo("#routes-scan1", { scaleX: 1 }, { scaleX: 0, duration: 2.6, ease: "power1.inOut" }, 0.8);
+          tl.fromTo("#routes-s1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 1.4);
+          tl.fromTo("#routes-p2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.6);
+          tl.fromTo("#routes-scan2", { scaleX: 1 }, { scaleX: 0, duration: 2.6, ease: "power1.inOut" }, 1.9);
+          tl.fromTo("#routes-s2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 2.8);
+          tl.fromTo("#routes-keys", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 3.2);
+          tl.fromTo(["#routes-img1", "#routes-img2"], { scale: 1 }, { scale: 1.03, duration: 6.4, ease: "none" }, 0.5);
+
+          // ---- phase B: the frontier, read at the legacy fill rate
+          const P2 = 6.8;
+          tl.to("#routes-a", { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, P2);
+          tl.to("#routes-title", { opacity: 0, duration: 0.3 }, P2);
+          tl.fromTo("#routes-title2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, P2 + 0.3);
+          tl.fromTo("#routes-b", { opacity: 0 }, { opacity: 1, duration: 0.01 }, P2 + 0.3);
+          tl.fromTo("#routes-chart", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, P2 + 0.4);
+
+          // overlay in the chart's own pixel space (frontier.png, 1950x1116 after darkmap, shown at 1000x572):
+          // x = 332 + (fill% - 90) * 150.1 ; y = 968 - (DIO - 30) * 13.514  (tick positions of the axes)
+          const S = 1000 / 1950;
+          const X = (f) => (332 + (f - 90) * 150.1) * S, Y = (d) => (968 - (d - 30) * 13.514) * S;
+          const ov = document.getElementById("routes-ov");
+          const el = (tag, attrs) => { const n = document.createElementNS(NS, tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); ov.appendChild(n); return n; };
+          const xL = X(98.46);
+          const vline = el("line", { x1: xL, x2: xL, y1: Y(100), y2: Y(30), stroke: "#3fd8a8", "stroke-width": 3, "stroke-dasharray": "8 7", opacity: 0 });
+          const vlab = el("text", { x: xL - 12, y: Y(30) - 14, "text-anchor": "end", fill: "#3fd8a8", "font-family": "JetBrains Mono, monospace", "font-size": 20, "font-weight": 700, opacity: 0 });
+          vlab.textContent = "legacy fill 98.46%";
+          const pts = [[97.6, "#b2bfcc"], [65.9, "#7fa8ff"], [52.1, "#3fd8a8"]];
+          const rings = pts.map(([d, c]) => el("circle", { cx: xL, cy: Y(d), r: 11, fill: "none", stroke: c, "stroke-width": 3.5, opacity: 0 }));
+          tl.fromTo(vline, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.5 }, P2 + 1.3);
+          tl.fromTo(vline, { attr: { y2: Y(100) } }, { attr: { y2: Y(30) }, duration: 0.8, ease: "power2.inOut" }, P2 + 1.3);
+          tl.fromTo(vlab, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.4 }, P2 + 1.9);
+          rings.forEach((r, i) => tl.fromTo(r, { attr: { opacity: 0, r: 22 } }, { attr: { opacity: 1, r: 11 }, duration: 0.45, ease: "power3.out" }, P2 + 2.1 + i * 0.6));
+
+          tl.fromTo("#routes-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, P2 + 1.0);
+          ["#routes-r1", "#routes-r2", "#routes-r3"].forEach((r, i) => {
+            tl.fromTo(r, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, P2 + 2.1 + i * 0.6);
+            tl.fromTo("#routes-f" + (i + 1), { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.out" }, P2 + 2.2 + i * 0.6);
+          });
+          const num = { v: 97.6 }, nEl = document.getElementById("routes-num");
+          tl.to(num, { v: 52.1, duration: 2.0, ease: "power2.inOut", onUpdate: () => { nEl.textContent = num.v.toFixed(1); } }, P2 + 2.4);
+          tl.fromTo("#routes-badge", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, P2 + 4.5);
+          tl.fromTo("#routes-foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, P2 + 4.8);
+          tl.to("#routes-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          window.__timelines["routes"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,454 @@
+{
+ "generated": "2026-10-14 14:20",
+ "commit": "ef2e4977bbb5278cf24e612031c686ff3d296161",
+ "checks": [
+  {
+   "id": "F-01",
+   "shown": "3 industry chips",
+   "type": "general-knowledge",
+   "status": "manual",
+   "computed": "-",
+   "reason": "Context statement, not a repo output."
+  },
+  {
+   "id": "F-02",
+   "shown": "4 problem cards",
+   "type": "general-knowledge",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-03",
+   "shown": "800 SKUs",
+   "type": "direct",
+   "computed": "800",
+   "expect": "800",
+   "status": "pass"
+  },
+  {
+   "id": "F-04",
+   "shown": "21.5M in stock",
+   "type": "direct",
+   "computed": "21.5M",
+   "expect": "21.5M",
+   "status": "pass"
+  },
+  {
+   "id": "F-05",
+   "shown": "172 days of cover",
+   "type": "direct",
+   "computed": "172",
+   "expect": "172",
+   "status": "pass"
+  },
+  {
+   "id": "F-06",
+   "shown": "26% imports",
+   "type": "direct",
+   "computed": "26%",
+   "expect": "26%",
+   "status": "pass"
+  },
+  {
+   "id": "F-07",
+   "shown": "45\u201390 d lead",
+   "type": "direct",
+   "computed": "45\u201390",
+   "expect": "45\u201390",
+   "status": "pass"
+  },
+  {
+   "id": "F-08",
+   "shown": "4,702 bulk orders",
+   "type": "direct",
+   "computed": "4,702",
+   "expect": "4,702",
+   "status": "pass"
+  },
+  {
+   "id": "F-09",
+   "shown": "3\u201321 d notice / 3 to 21 days before they ship",
+   "type": "direct",
+   "computed": "3\u201321",
+   "expect": "3\u201321",
+   "status": "pass"
+  },
+  {
+   "id": "F-10",
+   "shown": "60% of SKU-days sell nothing",
+   "type": "direct",
+   "computed": "60%",
+   "expect": "60%",
+   "status": "pass"
+  },
+  {
+   "id": "F-11",
+   "shown": "84-day average / ADU 84 d / 84-d window",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-12",
+   "shown": "EVERY 7 DAYS / weekly",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-13",
+   "shown": "EVERY DAY / all 800 SKUs, daily / per-day call",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-14",
+   "shown": "47% less stock / same fill rate / case + MOQ",
+   "type": "derived",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-15",
+   "shown": "on hand + on order \u2212 orders already placed",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-16",
+   "shown": "red 105 / yellow 205 / green 275 / net flow 170 -> 140 / Order 144",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-17",
+   "shown": "Without the customer order: 108.",
+   "type": "derived",
+   "computed": "108",
+   "expect": "108",
+   "status": "pass"
+  },
+  {
+   "id": "F-18",
+   "shown": "94.49% vs 94.51%",
+   "type": "direct",
+   "computed": "94.49% vs 94.51%",
+   "expect": "94.49% vs 94.51%",
+   "status": "pass"
+  },
+  {
+   "id": "F-19",
+   "shown": "seed 20240101",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-20",
+   "shown": "1,096 d \u00d7 800 / 2023: 4.7% missing",
+   "type": "direct",
+   "computed": "1,096 d, 4.7%",
+   "expect": "1,096 d, 4.7%",
+   "status": "pass"
+  },
+  {
+   "id": "F-21",
+   "shown": "+14\u201335 d holds",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-22",
+   "shown": "ADU 84 d \u00b7 LTF \u00b7 VF / red \u00b7 yellow \u00b7 green / \u2264 TOY? yes: up to TOG",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-23",
+   "shown": "4 classes \u00b7 180 d",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-24",
+   "shown": "day 731 / 731 \u00b7 731 simulated days",
+   "type": "direct",
+   "computed": "731",
+   "expect": "731",
+   "status": "pass"
+  },
+  {
+   "id": "F-25",
+   "shown": "11 z \u00b7 8 red sizes",
+   "type": "direct",
+   "computed": "11 z, 8 red",
+   "expect": "11 z, 8 red",
+   "status": "pass"
+  },
+  {
+   "id": "F-26",
+   "shown": "+ 3 fresh ranges / 4 ranges",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-27",
+   "shown": "\u00d790 / 90 runs",
+   "type": "derived",
+   "computed": "90",
+   "expect": "90",
+   "status": "pass"
+  },
+  {
+   "id": "F-28",
+   "shown": "\u2248 20 s / ~20 s",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-29",
+   "shown": "98.46%",
+   "type": "direct",
+   "computed": "98.46%",
+   "expect": "98.46%",
+   "status": "pass"
+  },
+  {
+   "id": "F-30",
+   "shown": "generate_data.py, data.load(), context(), simulate.py, buffers.py, classify.py, policies.py, config.py, Ddmrp.order(), metrics.kpis(), metrics.py, cli.py, charts.py, outputs/",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-31",
+   "shown": "LOCAL BLEND \u00b7 5-DAY LEAD / IMPORT \u00b7 79-DAY LEAD",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-32",
+   "shown": "legacy fill 98.46% + three rings",
+   "type": "illustrative",
+   "status": "manual",
+   "computed": "-",
+   "reason": "Annotation placed by the chart's own axis ticks; the curves are the repo's PNG, not redrawn. Visually confirmed: the rings sit on the legacy dot and on both swept curves."
+  },
+  {
+   "id": "F-33",
+   "shown": "97.6 / 65.9 / 52.1",
+   "type": "direct",
+   "computed": "97.6 / 65.9 / 52.1",
+   "expect": "97.6 / 65.9 / 52.1",
+   "status": "pass"
+  },
+  {
+   "id": "F-34",
+   "shown": "\u221247%",
+   "type": "derived",
+   "computed": "-47%",
+   "expect": "-47%",
+   "status": "pass"
+  },
+  {
+   "id": "F-35",
+   "shown": "MON 2025-09-08 \u00b7 DDMRP",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-36",
+   "shown": "49 purchase orders",
+   "type": "direct",
+   "computed": "49",
+   "expect": "49",
+   "status": "pass"
+  },
+  {
+   "id": "F-37",
+   "shown": "127,376 at cost",
+   "type": "direct",
+   "computed": "127,376",
+   "expect": "127,376",
+   "status": "pass"
+  },
+  {
+   "id": "F-38",
+   "shown": "7 pulled in by customer orders",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-39",
+   "shown": "+ 43 more SKUs to order today",
+   "type": "derived",
+   "computed": "43",
+   "expect": "43",
+   "status": "pass"
+  },
+  {
+   "id": "F-40",
+   "shown": "LUB-0022, LUB-0304, LUB-0540, LUB-0079, LUB-0788, LUB-0035",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-41",
+   "shown": "local \u00b7 5\u201314 days / imports \u00b7 45\u201390 days",
+   "type": "direct",
+   "computed": "5\u201314 / 45\u201390",
+   "expect": "5\u201314 / 45\u201390",
+   "status": "pass"
+  },
+  {
+   "id": "F-42",
+   "shown": "+3 / +6 / +76 / +42 with green checks",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-43",
+   "shown": "\u221213.7 d (65.9 \u2192 52.1 days)",
+   "type": "derived",
+   "computed": "-13.7",
+   "expect": "-13.7",
+   "status": "pass"
+  },
+  {
+   "id": "F-44",
+   "shown": "59.6 d",
+   "type": "direct",
+   "computed": "59.6",
+   "expect": "59.6",
+   "status": "pass"
+  },
+  {
+   "id": "F-45",
+   "shown": "legacy: 97.6\u2013108.2 days",
+   "type": "direct",
+   "computed": "97.6\u2013108.2",
+   "expect": "97.6\u2013108.2",
+   "status": "pass"
+  },
+  {
+   "id": "F-46",
+   "shown": "5.1\u00d7",
+   "type": "derived",
+   "computed": "5.1",
+   "expect": "5.1",
+   "status": "pass"
+  },
+  {
+   "id": "F-47",
+   "shown": "195 \u2192 1,004 a month",
+   "type": "direct",
+   "computed": "195 \u2192 1,004",
+   "expect": "195 \u2192 1,004",
+   "status": "pass"
+  },
+  {
+   "id": "F-48",
+   "shown": "5 policies",
+   "type": "direct",
+   "computed": "5",
+   "expect": "5",
+   "status": "pass"
+  },
+  {
+   "id": "F-49",
+   "shown": "96.61% \u00b7 39.9 d",
+   "type": "direct",
+   "computed": "96.61% \u00b7 39.9 d",
+   "expect": "96.61% \u00b7 39.9 d",
+   "status": "pass"
+  },
+  {
+   "id": "F-50",
+   "shown": "94.49% \u00b7 39.8 d",
+   "type": "direct",
+   "computed": "94.49% \u00b7 39.8 d",
+   "expect": "94.49% \u00b7 39.8 d",
+   "status": "pass"
+  },
+  {
+   "id": "F-51",
+   "shown": "94.51% \u00b7 40.1 d",
+   "type": "direct",
+   "computed": "94.51% \u00b7 40.1 d",
+   "expect": "94.51% \u00b7 40.1 d",
+   "status": "pass"
+  },
+  {
+   "id": "F-52",
+   "shown": "13.6% of demand value",
+   "type": "direct",
+   "computed": "13.6%",
+   "expect": "13.6%",
+   "status": "pass"
+  },
+  {
+   "id": "F-53",
+   "shown": "about 70%",
+   "type": "derived",
+   "computed": "70%",
+   "expect": "70%",
+   "status": "pass"
+  },
+  {
+   "id": "F-54",
+   "shown": "MIT",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-55",
+   "shown": "Python 3.11 \u00b7 NumPy \u00b7 pandas \u00b7 matplotlib",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  },
+  {
+   "id": "F-56",
+   "shown": "$ make run",
+   "type": "direct",
+   "computed": "true",
+   "expect": "true",
+   "status": "pass"
+  }
+ ]
+}
