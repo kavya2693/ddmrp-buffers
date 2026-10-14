@@ -7,9 +7,9 @@
 How much stock a lubricants distributor can release by switching to demand-driven
 replenishment buffers, measured at the same service level its customers get today.
 
-[![86-second silent walkthrough: the industry problem, how the buffers work, the architecture, the stock-versus-service frontier, a day of purchase orders and the results](docs/demo/demo.gif)](docs/demo/demo.mp4)
+[![86-second silent walkthrough: the industry problem, how the buffers work, the architecture, the stock-versus-service frontier, a day of purchase orders and the results](docs/demo/demo.gif)](https://kavya2693.github.io/work-demos/ddmrp-buffers.mp4)
 
-*~86-second silent walkthrough. Click for the full video ([MP4, 5 MB](docs/demo/demo.mp4)).*
+*~86-second silent walkthrough. [Play the full video](https://kavya2693.github.io/work-demos/ddmrp-buffers.mp4) · [download the MP4, 5 MB](docs/demo/demo.mp4).*
 
 📄 **Audit report:** every figure and assumption in the video, traced to its source — [PDF](docs/demo/AUDIT_REPORT.pdf) · [Word](docs/demo/AUDIT_REPORT.docx) · [Markdown](docs/demo/AUDIT_REPORT.md)
 
